@@ -1,0 +1,68 @@
+:root {
+    --main-bg-color: white;
+}
+
+@font-face {
+    font-family: "Roboto Regular";
+    src: url("../fonts/Roboto-Regular.ttf");
+}
+
+header {
+    color: black;
+    padding: 1%;
+    background: var(--main-bg-color);
+    font-size: 1rem;
+    height: 93px;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+header > a {
+    color: white;
+    text-decoration: none;
+    padding: 0 1rem;
+}
+
+header > a:hover {
+    text-decoration: underline;
+}
+
+.active {
+    color: blueviolet;
+    cursor: default;
+}
+
+footer {
+    color: white;
+    padding: 1%;
+    background: #029491;
+    font-size: 1rem;
+    height: 137px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.headerLinks {
+    display: flex;
+    color: black;
+    gap: 10px;
+    align-items: center;
+}
+
+main {
+    flex: 1;
+}
+
+.header_1 {
+    height: 288px;
+    font-size: 60px;
+    font-family: Ferry;
+    font-size: 60px;
+    font-weight: 900;
+    line-height: 72px;
+    letter-spacing: 0.01em;
+    text-align: left;
+}
