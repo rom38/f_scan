@@ -6,18 +6,20 @@ import imageLogo1 from "../media/scan_logo_1.svg";
 import imageLogo2 from "../media/scan_logo_2.svg";
 
 export const Layout = () => {
-    const classAcive = ({ isActive }) => isActive ? style.active : "";
+    const classActive = ({ isActive }) => isActive ? style.active : "";
 
     return (<>
         <header>
             <img src={imageLogo2} alt="" />
             <div className={style.headerLinks}>
-                <NavLink to="/main" className={classAcive}>Главная</NavLink>
-                <NavLink to="/about" className={classAcive}>Тарифы</NavLink>
+                <NavLink to="/main" className={classActive}>Главная</NavLink>
+                <NavLink to="/about" className={classActive}>Тарифы</NavLink>
                 <NavLink to="#" className={style.disableLink} >FAQ</NavLink>
 
             </div>
-
+            <div className={style.headerLinks}>
+                <NavLink to="/login" className={classActive}>Войти</NavLink>
+            </div>
         </header>
         <main>
 

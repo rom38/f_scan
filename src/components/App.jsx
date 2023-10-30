@@ -4,6 +4,7 @@ import { Route } from "react-router-dom";
 import AboutPage from "./AboutPage";
 // import NotFoundPage from "./NotFoundPage";
 import MainPage from "./MainPage";
+import LoginPage from "./LoginPage";
 import { Layout } from "./Layout";
 // import Categories from "./Categories";
 // import SwaggerUIWidget from "./SwaggerUIWidget";
@@ -18,6 +19,7 @@ function App() {
                     {/* <Route index element={<Categories />} /> */}
                     <Route path="about" element={<AboutPage />} />
                     <Route path="main" element={<MainPage />} />
+                    <Route path="login" element={<LoginPage />} />
                     {/* <Route path="swagger" element={<SwaggerUIWidget />} /> */}
                     {/* <Route path="list-dishes/:id" element={<CategoryDishes />} /> */}
                     {/* <Route path="dish/:idDish" element={<Dish />} /> */}

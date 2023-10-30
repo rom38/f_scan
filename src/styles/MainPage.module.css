@@ -18,13 +18,13 @@ header {
     align-items: stretch;
 }
 
-header > a {
+header>a {
     color: white;
     text-decoration: none;
     padding: 0 1rem;
 }
 
-header > a:hover {
+header>a:hover {
     text-decoration: underline;
 }
 
@@ -65,4 +65,8 @@ main {
     line-height: 72px;
     letter-spacing: 0.01em;
     text-align: left;
+}
+
+.container_1 {
+    display: flex;
 }
