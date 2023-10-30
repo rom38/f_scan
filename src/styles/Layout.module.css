@@ -3,8 +3,17 @@
 }
 
 @font-face {
-    font-family: "Roboto Regular";
-    src: url("../fonts/Roboto-Regular.ttf");
+    font-family: "Ferry";
+    src: url("../fonts/Ferry-Black.woff");
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("../fonts/Inter-Medium.woff2");
+    font-weight: 500;
+    font-style: normal;
 }
 
 header {
@@ -18,13 +27,13 @@ header {
     align-items: stretch;
 }
 
-header > a {
+header>a {
     color: white;
     text-decoration: none;
     padding: 0 1rem;
 }
 
-header > a:hover {
+header>a:hover {
     text-decoration: underline;
 }
 
@@ -44,7 +53,8 @@ footer {
     align-items: center;
     margin-top: auto;
 }
-footer > p {
+
+footer>p {
     font-family: Inter;
     font-size: 14px;
     font-weight: 400;
@@ -77,4 +87,8 @@ footer > p {
 
 main {
     flex: 1;
+}
+
+.disableLink {
+    pointer-events: none;
 }

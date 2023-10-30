@@ -14,7 +14,7 @@ export const Layout = () => {
             <div className={style.headerLinks}>
                 <NavLink to="/main" className={classAcive}>Главная</NavLink>
                 <NavLink to="/about" className={classAcive}>Тарифы</NavLink>
-                <NavLink to="/swagger" className={classAcive}>FAQ</NavLink>
+                <NavLink to="#" className={style.disableLink} >FAQ</NavLink>
 
             </div>
 
@@ -25,7 +25,7 @@ export const Layout = () => {
         </main>
         <footer>
             <img src={imageLogo1} alt="" />
-            <p>г. Москва, Цветной б-р, 40 +7 495 771 21 11 info@skan.ru</p>
+            <p>г. Москва, Цветной б-р, 40 <br />+7 495 771 21 11 info@skan.ru</p>
         </footer >
     </>
     )
