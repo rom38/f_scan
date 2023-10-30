@@ -10,14 +10,16 @@ export const Layout = () => {
 
     return (<>
         <header>
-            <img src={imageLogo2} alt="" />
-            <div className={style.headerLinks}>
+            <img src={imageLogo2} className={style.headerCol1} alt="" />
+            <div className={`${style.headerLinks} ${style.headerCol2}`}>
                 <NavLink to="/main" className={classActive}>Главная</NavLink>
                 <NavLink to="/about" className={classActive}>Тарифы</NavLink>
                 <NavLink to="#" className={style.disableLink} >FAQ</NavLink>
 
             </div>
-            <div className={style.headerLinks}>
+            <div className={`${style.headerLinks} ${style.headerCol3}`}>
+                <p >Зарегистрироваться</p>
+                <div className={style.divVertStick}></div>
                 <NavLink to="/login" className={classActive}>Войти</NavLink>
             </div>
         </header>

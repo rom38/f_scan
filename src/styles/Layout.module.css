@@ -57,7 +57,8 @@ header {
     background: var(--main-bg-color);
     font-size: 1rem;
     height: 93px;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     justify-content: space-between;
     align-items: stretch;
 }
@@ -68,9 +69,14 @@ header a {
     padding: 0 1rem;
 }
 
-header>a:hover {
-    text-decoration: underline;
+header p {
+    color: black;
+    padding: 0 1rem;
 }
+
+/* header img {
+    align-self: left;
+} */
 
 .active {
     color: blueviolet;
@@ -114,11 +120,13 @@ footer>p {
 }
 
 .headerLinks {
+    font-family: Inter;
     display: flex;
     color: black;
     gap: 10px;
     align-items: center;
-    text-decoration: none
+    text-decoration: none;
+    padding: 0 1rem;
 }
 
 main {
@@ -128,4 +136,22 @@ main {
 
 .disableLink {
     pointer-events: none;
+}
+
+.divVertStick {
+    height: 1.5em;
+    border: 2px solid;
+    color: #029491;
+}
+
+.headerCol1 {
+    justify-content: start;
+}
+
+.headerCol2 {
+    justify-content: center;
+}
+
+.headerCol3 {
+    justify-content: end;
 }
