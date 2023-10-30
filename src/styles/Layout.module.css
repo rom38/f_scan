@@ -155,3 +155,13 @@ main {
 .headerCol3 {
     justify-content: end;
 }
+
+.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    background-color: #029491;
+    border-radius: 3px;
+}

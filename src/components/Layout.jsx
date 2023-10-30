@@ -20,7 +20,7 @@ export const Layout = () => {
             <div className={`${style.headerLinks} ${style.headerCol3}`}>
                 <p >Зарегистрироваться</p>
                 <div className={style.divVertStick}></div>
-                <NavLink to="/login" className={classActive}>Войти</NavLink>
+                <NavLink to="/login" className={`${classActive} ${style.button}`}>Войти</NavLink>
             </div>
         </header>
         <main>
