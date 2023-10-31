@@ -1,6 +1,7 @@
 import style from "../styles/MainPage.module.css";
 import mainImg1 from "../media/main_img_1.svg";
 import mainImg2 from "../media/main_img_2.svg";
+import SimpleSlider from "./MainPageSlider";
 
 function MainPage() {
     return (
@@ -14,6 +15,7 @@ function MainPage() {
             <div className={style.header_1}>
                 почему именно мы
             </div>
+            <SimpleSlider />
             <img src={mainImg2} alt="" />
             <div className={style.header_1}>
                 наши тарифы
