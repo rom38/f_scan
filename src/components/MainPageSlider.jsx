@@ -7,7 +7,7 @@ import "../styles/MainPageSlider.css"
 import clock from "../media/main_clock.svg";
 import glass from "../media/main_glass.svg";
 import protect from "../media/main_protect.svg";
-import smile from "../media/main_smile.svg";
+import galka from "../media/main_galka.svg";
 
 function SimpleSlider() {
     return (
@@ -67,6 +67,6 @@ const slider = [
 
     {
         text: "Отличная компания от других!",
-        image: smile,
+        image: galka,
     },
 ];
