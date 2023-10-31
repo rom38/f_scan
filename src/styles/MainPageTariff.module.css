@@ -147,6 +147,7 @@
   }
 
   .current {
+    font-family: "Inter";
     color: #fff;
     font-size: 14px;
     padding: 3px 13px;
@@ -158,6 +159,7 @@
   }
 
   .disabled {
+    font-family: "Inter";
     display: none;
   }
 

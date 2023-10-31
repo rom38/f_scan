@@ -32,7 +32,7 @@ const Tariff = () => {
         >
           <span
             className={
-              store.token && item.id === 1 ? style.current : style.currentDisabled
+              store.token && item.id === 1 ? style.current : style.disabled
             }
           >
             Текущий тариф

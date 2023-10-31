@@ -70,3 +70,8 @@ main {
 .container_1 {
     display: flex;
 }
+
+.mainImage1 {
+    width: 629px;
+    height: 620px;
+}

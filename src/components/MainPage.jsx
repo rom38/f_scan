@@ -11,7 +11,8 @@ function MainPage() {
                 <div className={style.header_1}>
                     сервис по поиску публикаций о компании по его ИНН
                 </div>
-                <img src={mainImg1} alt="" />
+                <div>ggggg</div>
+                <img className={style.mainImage1} src={mainImg1} alt="" />
             </div >
             <div className={style.header_1}>
                 почему именно мы

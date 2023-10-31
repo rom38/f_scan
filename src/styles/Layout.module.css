@@ -160,8 +160,8 @@ main {
     -webkit-appearance: button;
     -moz-appearance: button;
     appearance: button;
-
+    height: 1.5em;
     text-decoration: none;
-    background-color: #029491;
-    border-radius: 3px;
+    background-color:  #7CE3E1;
+    border-radius: 5px;
 }
