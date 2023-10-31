@@ -1,5 +1,5 @@
 import style from "../styles/MainPage.module.css";
-import mainImg1 from "../media/main_img_1.svg";
+import mainImg1 from "../media/main_img_1.jpg";
 import mainImg2 from "../media/main_img_2.svg";
 import SimpleSlider from "./MainPageSlider";
 
