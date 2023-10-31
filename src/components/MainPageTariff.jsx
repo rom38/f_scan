@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import style from "../styles/MainPageTariff.module.css";
-import beginner from "../media/beginner.svg";
-import pro from "../media/images/pro.svg";
-import business from "../media/images/business.svg";
-import checkpoint from "../media/images/checkpoint.svg";
+import beginner from "../media/tariff_beginner.svg";
+import pro from "../media/tariff_pro.svg";
+import business from "../media/tariff_business.svg";
+import checkpoint from "../media/tariff_check.svg";
 
-const Tariff = observer(() => {
+//const Tariff = observer(() => {
+const Tariff = () => {
   // useEffect(() => {
   //   store.checkToken();
   // }, []);
@@ -17,7 +18,7 @@ const Tariff = observer(() => {
       <div className={style.tariff} key={item.id}>
         <div className={style.header} style={item.styleObj}>
           <div className={style.headerInfo}>
-            <h3 className={style.headerTitle}>{item.title}</h3>
+            <h3 className={style.title}>{item.title}</h3>
             <p className={style.description}>{item.description}</p>
           </div>
           <img alt="" src={item.image} />
@@ -44,23 +45,23 @@ const Tariff = observer(() => {
           </div>
           <p className={`${style.info} ${style.infoLoan}`}>{item.loan}</p>
           <p className={`${style.info} ${style.infoTitle}`}>В тариф входит:</p>
-          <li className="tariff-info">
-            <img className="tariff-info__check" src={checkpoint} alt="" />
+          <li className={style.info}>
+            <img className={style.infoCheck} src={checkpoint} alt="" />
             {item.details.detail1}
           </li>
-          <li className="tariff-info">
-            <img className="tariff-info__check" src={checkpoint} alt="" />
+          <li className={style.info}>
+            <img className={style.infoCheck} src={checkpoint} alt="" />
             {item.details.detail2}
           </li>
-          <li className="tariff-info">
-            <img className="tariff-info__check" src={checkpoint} alt="" />
+          <li className={style.info}>
+            <img className={style.infoCheck} src={checkpoint} alt="" />
             {item.details.detail3}
           </li>
           <button
             className={
               store.token && item.id === 1
-                ? "tariff-button tariff-button__current"
-                : "tariff-button"
+                ? `${style.button} ${style.buttonCurrent}`
+                : style.button
             }
           >
             <Link to="/error">
@@ -74,8 +75,8 @@ const Tariff = observer(() => {
     );
   });
 
-  return <div className="tariffs">{res}</div>;
-});
+  return <div className={style.tariffs}>{res}</div>;
+};
 
 export default Tariff;
 
