@@ -1,5 +1,8 @@
 :root {
     --main-bg-color: white;
+    --main-color-blue: #5970FF;
+    --main-color-light-green: #7CE3E1;
+    --main-color-yellow: #FFB64F;
 }
 
 @font-face {
@@ -162,6 +165,6 @@ main {
     appearance: button;
     height: 1.5em;
     text-decoration: none;
-    background-color:  #7CE3E1;
+    background-color: #7CE3E1;
     border-radius: 5px;
 }

@@ -12,17 +12,17 @@ function MainPage() {
                     сервис по поиску публикаций о компании по его ИНН
                 </div>
                 <div>ggggg</div>
-                <img className={style.mainImage1} src={mainImg1} alt="" />
+                <img src={mainImg1} alt="" />
             </div >
             <div className={style.header_1}>
                 почему именно мы
             </div>
             <SimpleSlider />
-            <img src={mainImg2} alt="" />
+            <img className={style.mainImg2} src={mainImg2} alt="" />
             <div className={style.header_1}>
                 наши тарифы
             </div>
-            <Tariff/>
+            <Tariff />
         </>
     );
 }
