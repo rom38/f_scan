@@ -84,6 +84,7 @@
     letter-spacing: var(--letter-spacing);
     display: flex;
     list-style: none;
+    text-align: left;
   }
 
   .infoLoan {

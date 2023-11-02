@@ -29,7 +29,7 @@ export const Layout = () => {
         </main>
         <footer>
             <img src={imageLogo1} alt="" />
-            <p>г. Москва, Цветной б-р, 40 <br />+7 495 771 21 11 info@skan.ru</p>
+            <p>г. Москва, Цветной б-р, 40 <br />+7 495 771 21 11 info@skan.ru<br /><br />Copyright, 2022  </p>
         </footer >
     </>
     )
