@@ -83,6 +83,10 @@
     margin-top: 50px;
 
 }
+.button_1:hover {
+    transform: scale(1.03);
+    box-shadow: #596fff6c 3px 3px 0px 1px;
+  }
 
 @media all and (max-width: 768px) {
     .container_1 img {

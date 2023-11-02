@@ -119,9 +119,9 @@ footer>p {
     padding: 0 1rem;
 }
 
-/* a.headerLinks:hover {
+.headerLinks > a:hover {
     text-decoration:underline;
-} */
+}
 
 main {
     flex: 1;
