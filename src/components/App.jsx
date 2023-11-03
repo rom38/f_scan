@@ -16,10 +16,12 @@ function App() {
         <>
             <Routes>
                 <Route path="/" element={<Layout />}>
-                    {/* <Route index element={<Categories />} /> */}
+                    <Route index element={<MainPage />} />
                     <Route path="about" element={<AboutPage />} />
                     <Route path="main" element={<MainPage />} />
                     <Route path="login" element={<LoginPage />} />
+                    <Route path="faq" element={<AboutPage />} />
+
                     {/* <Route path="swagger" element={<SwaggerUIWidget />} /> */}
                     {/* <Route path="list-dishes/:id" element={<CategoryDishes />} /> */}
                     {/* <Route path="dish/:idDish" element={<Dish />} /> */}
