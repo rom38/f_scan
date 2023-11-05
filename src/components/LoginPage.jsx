@@ -1,6 +1,14 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form"
+import { Link } from "react-router-dom";
+
 import style from "../styles/LoginPage.module.css";
 import loginChar from "../media/login_characters.svg";
-import mainImg2 from "../media/main_img_2.svg";
+import loginLock from "../media/login_lock.svg";
+import loginGoogle from "../media/login_google.svg"
+import loginYandex from "../media/login_yandex.svg";
+import loginFacebook from "../media/login_facebook.svg";
 
 function LoginPage() {
     return (
@@ -8,10 +16,118 @@ function LoginPage() {
             <div className={style.header_1}>
                 Для оформления подписки на тариф, необходимо авторизоваться.
             </div>
+
+
+            {/* <div className={style.login_group}> */}
+            {/* </div> */}
+            <LoginForm />
+
             <img src={loginChar} alt="" />
 
-        </div>
+        </div >
     );
 }
 
+function LoginForm() {
+    const navigate = useNavigate();
+
+    // useEffect(() => {
+    //     store.token && navigate("/");
+    // });
+
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors, isValid },
+    } = useForm({
+        mode: "onBlur",
+        defaultValues: {
+            login: "sf_student1",
+            password: "4i2385j",
+        },
+    });
+
+    const onSubmit = (data) => {
+        // store.setLogin(data.login);
+        // store.setPassword(data.password);
+        // store.getToken();
+        console.log('form submit', data);
+        reset();
+    };
+    const store_test = { isAuthError: true, isLoading: true };
+
+    return (
+        <form className={style.login_group} onSubmit={handleSubmit(onSubmit)}>
+            <img className={style.lock} src={loginLock} alt="" />
+            <div className={style.button_links}>
+                <button >
+                    <Link to="/auth">Войти</Link>
+                </button>
+                <button >
+                    <Link to="/error">Зарегистрироваться</Link>
+                </button>
+            </div>
+            <label className={style.label}>
+                {store_test.isAuthError
+                    ? "Неправильный логин или номер телефона"
+                    : "Логин или номер телефона:"}
+                <input
+                    {...register("login", {
+                        required: true,
+                    })}
+                    className={
+                        errors?.login ? style.input_error : style.input
+                    }
+                    type="text"
+                />
+                {errors?.login && (
+                    <p className={style.error_message}>Введите корректные данные</p>
+                )}
+            </label>
+            <label className={style.label}>
+                {store_test.isAuthError ? "Неправильный пароль" : "Пароль:"}
+                <input
+                    {...register("password", {
+                        required: true,
+                    })}
+                    className={
+                        errors?.password ? style.input_error : style.input
+                    }
+                    type="password"
+                    autoComplete="on"
+                />
+                {errors?.password && (
+                    <p className={style.error_message}>Введите корректные данные</p>
+                )}
+            </label>
+            <button
+                disabled={!isValid}
+                className={style.button_submit}
+                type="submit"
+            >
+                Войти
+            </button>
+            <Link className={style.restore_pass} to="/error">
+                Восстановить пароль
+            </Link>
+            <p className={style.sign_social_text}>Войти через:</p>
+            <div className={style.sign_social}>
+                <Link to="https://google.com" target="_blank">
+                    <img src={loginGoogle} alt="" />
+                </Link>
+                <Link to="https://facebook.com" target="_blank">
+                    <img src={loginFacebook} alt="" />
+                </Link>
+                <Link to="https://yandex.ru" target="_blank">
+                    <img src={loginYandex} alt="" />
+                </Link>
+            </div>
+        </form>
+    );
+
+}
+
 export default LoginPage;
+
+
