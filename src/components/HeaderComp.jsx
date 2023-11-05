@@ -1,14 +1,16 @@
 // import { Link } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import style from "../styles/HeaderComp.module.css";
 import imageLogo1 from "../media/scan_logo_1.svg";
 import imageLogo2 from "../media/scan_logo_2.svg";
 import headerSpinner from "../media/header_spinner.png";
+import HeaderUserImage from "../media/header_user_img.png";
 
 const HeaderComp = () => {
     const classActive = ({ isActive }) => isActive ? style.active : "";
 
     const store = { token: true, isCompaniesLoading: false };
+    const login = "Алексей А."
     let infoWidget = (
         <div className={style.info_widget}>{store?.isCompaniesLoading ? (
             <img className={style.lds} src={headerSpinner} />
@@ -36,19 +38,25 @@ const HeaderComp = () => {
             <NavLink to="/login" className={`${classActive} ${style.button}`}>Войти</NavLink>
         </>
     );
-    let userInfo = null;
-    let loaderWidget2 = (
-        <div className={style.lds}>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    )
+    let userInfo = (
+        <>
+            <div className={style.header_user}>
+                <span className="username">{login}</span>
+                <button
+                    className="logout"
+                    onClick={() => {
+                        store.setToken("");
+                        localStorage.clear();
+                    }}
+                >
+                    <Link className="header-nav__link" to="/">
+                        Выйти
+                    </Link>
+                </button>
+            </div>
+            <img className={style.header_user_image} src={HeaderUserImage} alt="user avatar" />
+        </>
+    );
 
     return (
         <header>
