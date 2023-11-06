@@ -1,11 +1,14 @@
-import style from "../styles/MainPage.module.css";
-import mainImg1 from "../media/main_img_1.jpg";
-import mainImg2 from "../media/main_img_2.svg";
+import style from "../styles/SearchPage.module.css";
+import searchDocument from "../media/search_document.svg";
+import searchFolders from "../media/search_folders.svg";
+import searchMan from "../media/search_man.svg";
+
 import SimpleSlider from "./MainPageSlider";
 import Tariff from "./MainPageTariff";
 import { Link } from "react-router-dom";
 
-function MainPage() {
+
+function SearchPage() {
     const store = { token: true };
     return (
         <>
@@ -42,4 +45,4 @@ function MainPage() {
     );
 }
 
-export default MainPage;
+export default SearchPage;

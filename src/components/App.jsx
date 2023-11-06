@@ -5,7 +5,9 @@ import AboutPage from "./AboutPage";
 // import NotFoundPage from "./NotFoundPage";
 import MainPage from "./MainPage";
 import LoginPage from "./LoginPage";
+import SearchPage from "./SearchPage";
 import { Layout } from "./Layout";
+
 // import Categories from "./Categories";
 // import SwaggerUIWidget from "./SwaggerUIWidget";
 // import Dish from "./Dish";
@@ -21,6 +23,8 @@ function App() {
                     <Route path="main" element={<MainPage />} />
                     <Route path="login" element={<LoginPage />} />
                     <Route path="faq" element={<AboutPage />} />
+                    <Route path="search" element={<SearchPage />} />
+
 
                     {/* <Route path="swagger" element={<SwaggerUIWidget />} /> */}
                     {/* <Route path="list-dishes/:id" element={<CategoryDishes />} /> */}
