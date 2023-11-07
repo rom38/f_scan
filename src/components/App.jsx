@@ -7,6 +7,7 @@ import MainPage from "./MainPage";
 import LoginPage from "./LoginPage";
 import SearchPage from "./SearchPage";
 import { Layout } from "./Layout";
+import ResultsPage from "./ResultsPage";
 
 // import Categories from "./Categories";
 // import SwaggerUIWidget from "./SwaggerUIWidget";
@@ -24,6 +25,7 @@ function App() {
                     <Route path="login" element={<LoginPage />} />
                     <Route path="faq" element={<AboutPage />} />
                     <Route path="search" element={<SearchPage />} />
+                    <Route path="results" element={<ResultsPage />} />
 
 
                     {/* <Route path="swagger" element={<SwaggerUIWidget />} /> */}

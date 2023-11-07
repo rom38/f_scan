@@ -37,7 +37,7 @@ function SearchForm() {
         //   store.setIDs({});
         //   store.getIDs();
         //   navigate("/result");
-        navigate("/about");
+        navigate("/results");
     };
     const setSearchFormChecks = (str) => {
         console.log(`${str}=true`);
@@ -136,10 +136,8 @@ function SearchForm() {
                                 }}
                                 fixedHeight
                                 showYearDropdown
+                                placeholderText={'Дата начала'}
                             />
-                            <label className={style.required_info} htmlFor="startDate">
-                                Дата начала
-                            </label>
                         </div>
                         <div className={style.date_picker_label}>
                             <DatePicker
@@ -156,10 +154,8 @@ function SearchForm() {
                                 }}
                                 fixedHeight
                                 showYearDropdown
+                                placeholderText={'Дата конца'}
                             />
-                            <label className={style.required_info} htmlFor="startDate">
-                                Дата конца
-                            </label>
                         </div>
                     </div>
                 </div>
