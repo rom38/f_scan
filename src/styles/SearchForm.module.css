@@ -1,0 +1,215 @@
+.search_form {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 30px 40px;
+    margin-top: 50px;
+    display: flex;
+    width: 792px;
+    justify-content: space-between;
+    gap: 55px;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    font-family: Inter;
+}
+
+.label {
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    margin-bottom: 20px;
+    letter-spacing: 0.54px;
+    position: relative;
+    text-align: left;
+}
+
+.input {
+    max-width: 268px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #c7c7c7;
+    background: #fff;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.05);
+    padding: 13px;
+    letter-spacing: 0.03em;
+    margin: 20px 0;
+}
+
+
+select {
+    cursor: pointer;
+}
+
+.input::placeholder {
+    text-align: center;
+}
+
+.input:focus {
+    outline: 2px solid var(--main-color-green);
+}
+
+.input_invalid {
+    box-shadow: 0px 0px 20px rgba(255, 89, 89, 0.2);
+    border: 1px solid #ff5959;
+}
+
+.input_invalid:focus {
+    border: none;
+}
+
+.error_message {
+    font-size: 14px;
+    letter-spacing: var(--letter-spacing);
+    color: #ff5959;
+    position: absolute;
+    top: 92%;
+    align-self: center;
+}
+
+.date_picker_wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.date_picker {
+    display: flex;
+}
+
+.date_picker_label {
+    display: flex;
+    flex-direction: column;
+}
+
+.required_info {
+    color: #949494;
+    font-size: 14px;
+    letter-spacing: var(--letter-spacing);
+    margin-top: 10px;
+}
+
+.dates {
+    width: 90%;
+    margin: 0;
+}
+
+.checks,
+.checks_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.check {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.checks_label {
+    cursor: pointer;
+    opacity: 0.4;
+}
+
+input[type="checkbox"] {
+    opacity: 0.4;
+    margin-right: 20px;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #000;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+input[type="checkbox"]:hover {
+    background-color: #e8e8e8;
+}
+
+input[type="checkbox"]:checked::after {
+    display: flex;
+    justify-content: center;
+    content: "\2714";
+    color: #00a100;
+}
+
+input[type="checkbox"]:checked+label {
+    opacity: 1;
+}
+
+input[type="checkbox"]:checked {
+    opacity: 1;
+}
+
+.button {
+    align-self: flex-end;
+    width: 300px;
+}
+
+.search-loader {
+    height: 55px;
+}
+
+@media screen and (max-width: 1212px) {
+    .search_form {
+        flex-direction: column;
+        padding: 40px 20px;
+    }
+
+    .button {
+        width: 100%;
+        margin-top: 25px;
+        align-self: center;
+    }
+
+    .button_submit {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .checks {
+        display: none;
+    }
+
+    .inputs,
+    .label {
+        width: 100%;
+    }
+
+    .date_picker_label {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .search_title {
+        font-size: 30px;
+        width: 100%;
+    }
+
+    .search_body {
+        flex-direction: column;
+    }
+
+    .search_form {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .search_title {
+        font-size: 25px;
+    }
+
+    .date_picker {
+        flex-direction: column;
+    }
+
+    .date_picker_label {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
