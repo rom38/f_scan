@@ -25,9 +25,9 @@ const slice = createSlice({
     },
 })
 
-export const { setCredentials } = slice.actions
+export const { setCredentials, resetCredentials } = slice.actions
 
 export default slice.reducer
 
 export const selectAuthExpire = (state) => state.auth.expire
-export const selectAuthAccessToken = (state) => state.auth.expire
+export const selectAuthAccessToken = (state) => state.auth.accessToken

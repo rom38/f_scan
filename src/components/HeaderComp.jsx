@@ -6,21 +6,25 @@ import imageLogo2 from "../media/scan_logo_2.svg";
 import headerSpinner from "../media/header_spinner.png";
 import HeaderUserImage from "../media/header_user_img.png";
 import { selectAuthAccessToken } from "../slicers/authSlice";
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { resetCredentials } from "../slicers/authSlice";
+
 
 const HeaderComp = () => {
     const classActive = ({ isActive }) => isActive ? style.active : "";
 
     const store = { token: true, isCompaniesLoading: false };
+    const accessToken = useSelector(selectAuthAccessToken);
+    // console.log('token from header', accessToken)
+
     const login = "Алексей А."
     const dispatch = useDispatch();
     let infoWidget = (
         <div className={style.info_widget}>{store?.isCompaniesLoading ? (
             <img className={style.lds} src={headerSpinner} />
-
         ) : (
             <>
-
                 <p>
                     Использовано компаний
                     <span>{10}</span>
@@ -31,7 +35,6 @@ const HeaderComp = () => {
                 </p>
             </>)}
         </div>
-
     );
 
     let loginInfo = (
@@ -48,8 +51,9 @@ const HeaderComp = () => {
                 <button
                     className="logout"
                     onClick={() => {
-                        store.setToken("");
-                        localStorage.clear();
+                        // store.setToken("");
+                        // localStorage.clear();
+                        dispatch(resetCredentials());
                     }}
                 >
                     <Link className="header-nav__link" to="/">
@@ -72,8 +76,8 @@ const HeaderComp = () => {
             </div>
 
             <div className={`${style.headerLinks} ${style.headerCol3}`}>
-                {store?.token && (<>{infoWidget}</>)}
-                {store?.token ? userInfo : loginInfo}
+                {accessToken && (<>{infoWidget}</>)}
+                {accessToken ? userInfo : loginInfo}
 
             </div>
         </header>
