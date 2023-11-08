@@ -6,7 +6,7 @@ import Tariff from "./MainPageTariff";
 import { Link } from "react-router-dom";
 
 function MainPage() {
-    const store = { token: true };
+    const store = { token: false };
     return (
         <>
             <div className={style.container_1}>
@@ -23,7 +23,7 @@ function MainPage() {
                         {store.token ? (
                             <Link to="/search">Запросить данные</Link>
                         ) : (
-                            <Link to="/auth">Войти</Link>
+                            <Link to="/login">Войти</Link>
                         )}
                     </button>
                 </div>

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom";
@@ -9,6 +10,11 @@ import loginLock from "../media/login_lock.svg";
 import loginGoogle from "../media/login_google.svg"
 import loginYandex from "../media/login_yandex.svg";
 import loginFacebook from "../media/login_facebook.svg";
+
+import { useLocalStorage } from "../hooks/useLocalStorage";
+import { useLoginMutation } from "../services/apiScan";
+import { setCredentials } from "../slicers/authSlice";
+import { useDispatch } from "react-redux";
 
 function LoginPage() {
     return (
@@ -48,14 +54,28 @@ function LoginForm() {
         },
     });
 
-    const onSubmit = (data) => {
+    const [login, { isLoading, error }] = useLoginMutation();
+    const dispatch = useDispatch();
+
+    const [isAuthError, setIsAuthError] = useState(false);
+    const onSubmit = async (data) => {
         // store.setLogin(data.login);
         // store.setPassword(data.password);
         // store.getToken();
+        try {
+            const credentials = await login(data).unwrap()
+            console.log('from rtk')
+            dispatch(setCredentials(credentials))
+            setIsAuthError(false);
+            navigate('/')
+        } catch (err) {
+            console.log('error fetch token', err)
+            setIsAuthError(true);
+        }
         console.log('form submit', data);
         reset();
     };
-    const store_test = { isAuthError: true, isLoading: true };
+    //const store_test = { isAuthError: true, isLoading: true };
 
     return (
         <form className={style.login_group} onSubmit={handleSubmit(onSubmit)}>
@@ -69,7 +89,7 @@ function LoginForm() {
                 </button>
             </div>
             <label className={style.label}>
-                {store_test.isAuthError
+                {isAuthError
                     ? "Неправильный логин или номер телефона"
                     : "Логин или номер телефона:"}
                 <input
@@ -86,7 +106,7 @@ function LoginForm() {
                 )}
             </label>
             <label className={style.label}>
-                {store_test.isAuthError ? "Неправильный пароль" : "Пароль:"}
+                {isAuthError ? "Неправильный пароль" : "Пароль:"}
                 <input
                     {...register("password", {
                         required: true,

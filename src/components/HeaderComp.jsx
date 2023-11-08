@@ -5,12 +5,15 @@ import imageLogo1 from "../media/scan_logo_1.svg";
 import imageLogo2 from "../media/scan_logo_2.svg";
 import headerSpinner from "../media/header_spinner.png";
 import HeaderUserImage from "../media/header_user_img.png";
+import { selectAuthAccessToken } from "../slicers/authSlice";
+import { useDispatch } from "react-redux";
 
 const HeaderComp = () => {
     const classActive = ({ isActive }) => isActive ? style.active : "";
 
     const store = { token: true, isCompaniesLoading: false };
     const login = "Алексей А."
+    const dispatch = useDispatch();
     let infoWidget = (
         <div className={style.info_widget}>{store?.isCompaniesLoading ? (
             <img className={style.lds} src={headerSpinner} />
