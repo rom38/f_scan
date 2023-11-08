@@ -1,12 +1,17 @@
+import { selectAuthAccessToken } from "../slicers/authSlice";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+
 import style from "../styles/MainPage.module.css";
 import mainImg1 from "../media/main_img_1.jpg";
 import mainImg2 from "../media/main_img_2.svg";
 import SimpleSlider from "./MainPageSlider";
 import Tariff from "./MainPageTariff";
-import { Link } from "react-router-dom";
 
 function MainPage() {
-    const store = { token: false };
+    // const store = { token: false };
+    const accessToken = useSelector(selectAuthAccessToken);
     return (
         <>
             <div className={style.container_1}>
@@ -20,7 +25,7 @@ function MainPage() {
                         в формате PDF на электронную почту.
                     </p>
                     <button className={style.button_1}>
-                        {store.token ? (
+                        {accessToken ? (
                             <Link to="/search">Запросить данные</Link>
                         ) : (
                             <Link to="/login">Войти</Link>
