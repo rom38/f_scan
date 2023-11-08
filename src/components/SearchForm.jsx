@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import DatePicker from "react-datepicker";
+import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import style from "../styles/SearchForm.module.css";
 
@@ -19,14 +20,17 @@ function SearchForm() {
     const {
         register,
         handleSubmit,
+        control,
         formState: { errors, isValid },
     } = useForm({
         mode: "onBlur",
         defaultValues: {
             inn: "7736050003",
+            endDate: new Date(2023, 10, 10),
+            startDate: new Date(2022, 1, 10),
         },
     });
-    const store = { startDate: new Date(), endDate: new Date() };
+    const store = { startDate: new Date(2022, 1, 10), endDate: new Date(2023, 10, 10) };
 
     const onSubmit = (data) => {
         //   store.setSummaryError(false);
@@ -37,6 +41,7 @@ function SearchForm() {
         //   store.setIDs({});
         //   store.getIDs();
         //   navigate("/result");
+        console.log('form_search_data', data);
         navigate("/results");
     };
     const setSearchFormChecks = (str) => {
@@ -62,6 +67,7 @@ function SearchForm() {
                             pattern: {
                                 value: /^[0-9]{10}$/,
                             },
+                            validate: validateINN || "контроль не пройден"
                         })}
                     />
                     {errors?.inn && errors.inn.type === "required" && (
@@ -76,6 +82,11 @@ function SearchForm() {
                     {errors?.inn && errors.inn.type === "pattern" && (
                         <p className={style.error_message}>
                             Введите корректные данные
+                        </p>
+                    )}
+                    {errors?.inn && errors.inn.type === "validate" && (
+                        <p className={style.error_message}>
+                            Контроль ИНН не пройден
                         </p>
                     )}
                 </label>
@@ -122,39 +133,47 @@ function SearchForm() {
                     <label className={style.label}>Диапазон поиска*</label>
                     <div className={style.date_picker}>
                         <div className={style.date_picker_label}>
-                            <DatePicker
-                                id="startDate"
-                                selectsStart
-                                required={true}
-                                className={`${style.input} ${style.dates}`}
-                                startDate={store.startDate}
-                                dateFormat="dd.MM.yyyy"
-                                selected={store.startDate}
-                                maxDate={store.endDate}
-                                onChange={(startDate) => {
-                                    console.log('start_date', startDate);
-                                }}
-                                fixedHeight
-                                showYearDropdown
-                                placeholderText={'Дата начала'}
+                            <Controller
+                                control={control}
+                                name="startDate"
+                                render={({ field: { onChange, onBlur, value, ref } }) => (
+                                    <ReactDatePicker
+                                        onChange={onChange}
+                                        selected={value}
+                                        selectsStart
+                                        required={true}
+                                        className={`${style.input} ${style.dates}`}
+                                        startDate={store.startDate}
+                                        dateFormat="dd.MM.yyyy"
+                                        minDate={store.startDate}
+                                        maxDate={store.endDate}
+                                        fixedHeight
+                                        showYearDropdown
+                                        placeholderText={'Дата начала'}
+                                        popperPlacement='auto'
+                                    />)}
                             />
                         </div>
                         <div className={style.date_picker_label}>
-                            <DatePicker
-                                selectsEnd
-                                required={true}
-                                className={`${style.input} ${style.dates}`}
-                                startDate={store.startDate}
-                                dateFormat="dd.MM.yyyy"
-                                selected={store.endDate}
-                                minDate={store.startDate}
-                                maxDate={new Date()}
-                                onChange={(endDate) => {
-                                    console.log('end_date', endDate);
-                                }}
-                                fixedHeight
-                                showYearDropdown
-                                placeholderText={'Дата конца'}
+                            <Controller
+                                control={control}
+                                name="endDate"
+                                render={({ field: { onChange, onBlur, value, ref } }) => (
+                                    <DatePicker
+                                        onChange={onChange}
+                                        selected={value}
+                                        selectsEnd
+                                        required={true}
+                                        className={`${style.input} ${style.dates}`}
+                                        startDate={store.startDate}
+                                        dateFormat="dd.MM.yyyy"
+                                        minDate={store.startDate}
+                                        maxDate={new Date()}
+                                        fixedHeight
+                                        showYearDropdown
+                                        popperPlacement='auto'
+                                        placeholderText={'Дата конца'}
+                                    />)}
                             />
                         </div>
                     </div>
@@ -254,3 +273,26 @@ function SearchForm() {
 };
 
 export default SearchForm;
+
+function validateINN(inn) {
+    if (inn.length !== 10) {
+        return false; // ИНН должен состоять из 10 цифр
+    }
+
+    const weights = [2, 4, 10, 3, 5, 9, 4, 6, 8];
+    let sum = 0;
+
+    for (let i = 0; i < 9; i++) {
+        sum += parseInt(inn.charAt(i)) * weights[i];
+    }
+
+    const remainder = sum % 11;
+    const controlDigit = (remainder < 10) ? remainder : 0;
+
+    return controlDigit === parseInt(inn.charAt(9));
+}
+
+// Пример использования:
+// const inn = "1234567890"; // Замените на нужный ИНН
+// const isValid = validateINN(inn);
+// console.log(`ИНН ${inn} ${isValid ? "валиден" : "не валиден"}`);

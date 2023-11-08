@@ -66,7 +66,7 @@ select {
     letter-spacing: var(--letter-spacing);
     color: #ff5959;
     position: absolute;
-    top: 92%;
+    top: 80%;
     align-self: center;
 }
 
