@@ -1,9 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 
+const initStateLocalStorage = () => {
+    let accessToken = localStorage.getItem('accessToken')
+        ? JSON.parse(localStorage.getItem('accessToken'))
+        : null
+    let expire = localStorage.getItem('expire')
+        ? JSON.parse(localStorage.getItem('expire'))
+        : null
+    // console.log('expire', Date(expire));
+    if (Date(expire) < new Date()) {
+        localStorage.removeItem('expire');
+        localStorage.removeItem('accessToken');
+        accessToken = null;
+        expire = null;
+    }
+
+    return { expire: expire, accessToken: accessToken }
+}
+
 const slice = createSlice({
     name: 'auth',
-    initialState: { expire: null, accessToken: null },
+    // initialState: { expire: null, accessToken: null },
+    initialState: initStateLocalStorage,
     reducers: {
         setCredentials: (
             state,
@@ -14,12 +33,12 @@ const slice = createSlice({
             localStorage.setItem('expire', JSON.stringify(expire))
             localStorage.setItem('accessToken', JSON.stringify(accessToken))
         },
-        resetCredentials: (  state ) => {
+        resetCredentials: (state) => {
             state.expire = null;
             state.accessToken = null;
             localStorage.removeItem('expire');
             localStorage.removeItem('accessToken');
-            localStorage.clear();
+            // localStorage.clear();
 
         },
     },
