@@ -22,11 +22,13 @@ export const api = createApi({
                 method: 'POST',
                 body: credentials,
             }),
-
-        }),
+            }),
+        getCompanies: builder.query({
+            query: () => "info",
+            }),
     }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useLoginMutation } = api
+export const { useLoginMutation, useGetCompaniesQuery } = api

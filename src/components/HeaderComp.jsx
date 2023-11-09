@@ -9,7 +9,31 @@ import { selectAuthAccessToken } from "../slicers/authSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { resetCredentials } from "../slicers/authSlice";
+import { useGetCompaniesQuery } from "../services/apiScan";
 
+
+const InfoWidget2 = () => {
+    const store = { token: true, isCompaniesLoading: false };
+    const { data, error, isLoading } = useGetCompaniesQuery();
+
+    return (
+        <div className={style.info_widget}>{isLoading ? (
+            <img className={style.lds} src={headerSpinner} />
+        ) : (
+            <>
+                <p>
+                    Использовано компаний
+                    <span>{data.eventFiltersInfo.usedCompanyCount}</span>
+                </p>
+                <p>
+                    Лимит по компаниям
+                    <span>{data.eventFiltersInfo.companyLimit}</span>
+                </p>
+            </>)}
+        </div>
+    )
+
+}
 
 const HeaderComp = () => {
     const classActive = ({ isActive }) => isActive ? style.active : "";
@@ -76,7 +100,8 @@ const HeaderComp = () => {
             </div>
 
             <div className={`${style.headerLinks} ${style.headerCol3}`}>
-                {accessToken && (<>{infoWidget}</>)}
+                {/* {accessToken && (<>{infoWidget}</>)} */}
+                {accessToken && <InfoWidget2 />}
                 {accessToken ? userInfo : loginInfo}
 
             </div>
