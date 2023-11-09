@@ -1,3 +1,6 @@
+import { selectAuthAccessToken } from "../slicers/authSlice";
+import { useSelector } from "react-redux";
+
 import { Link } from "react-router-dom";
 import style from "../styles/MainPageTariff.module.css";
 import checkpoint from "../media/tariff_check.svg";
@@ -9,6 +12,7 @@ const Tariff = () => {
     //   store.checkToken();
     // }, []);
     const store = { "token": "1" };
+    const accessToken = useSelector(selectAuthAccessToken);
 
 
     let res = tariff_data.map(function (item) {
@@ -23,14 +27,14 @@ const Tariff = () => {
                 </div>
                 <div
                     className={
-                        store.token && item.id === 1
+                        accessToken && item.id === 1
                             ? `${style.body} ${style.bodyCurrent}`
                             : style.body
                     }
                 >
                     <span
                         className={
-                            store.token && item.id === 1 ? style.current : style.disabled
+                            accessToken && item.id === 1 ? style.current : style.disabled
                         }
                     >
                         Текущий тариф
@@ -57,13 +61,13 @@ const Tariff = () => {
                     </li>
                     <button
                         className={
-                            store.token && item.id === 1
+                            accessToken && item.id === 1
                                 ? `${style.button} ${style.buttonCurrent}`
                                 : style.button
                         }
                     >
                         <Link to="/error">
-                            {store.token && item.id === 1
+                            {accessToken && item.id === 1
                                 ? "Перейти в личный кабинет"
                                 : "Подробнее"}
                         </Link>

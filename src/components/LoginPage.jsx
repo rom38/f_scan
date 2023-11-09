@@ -58,10 +58,12 @@ function LoginForm() {
     const dispatch = useDispatch();
 
     const [isAuthError, setIsAuthError] = useState(false);
-    const onSubmit = async (data) => {
+    const onSubmit = async (data, e) => {
         // store.setLogin(data.login);
         // store.setPassword(data.password);
         // store.getToken();
+        e.preventDefault()
+        // console.log('form submit event', e);
         try {
             const credentials = await login(data).unwrap()
             console.log('from rtk')
@@ -72,7 +74,7 @@ function LoginForm() {
             console.log('error fetch token', err)
             setIsAuthError(true);
         }
-        console.log('form submit', data);
+        // console.log('form submit', data);
         reset();
     };
     //const store_test = { isAuthError: true, isLoading: true };
