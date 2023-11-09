@@ -4,6 +4,23 @@ import DatePicker from "react-datepicker";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import style from "../styles/SearchForm.module.css";
+import { useId } from "react";
+
+function SearchCheckbox({ name, register }) {
+    const idCheck = useId();
+    return (
+        <div className={style.check}>
+            <input
+                id={idCheck}
+                type="checkbox"
+                {...register(name)}
+            />
+            <label htmlFor={idCheck} className={style.checks_label}>
+                Включать сводки новостей
+            </label>
+        </div>
+    )
+}
 
 
 function SearchForm() {
@@ -16,6 +33,15 @@ function SearchForm() {
     // useEffect(() => {
     //     store.resetSearchFormChecks();
     // });
+    const flagsArray = [
+        'maxFullness',
+        'inBusinessNews',
+        'onlyMainRole',
+        'onlyWithRiskFactors',
+        'excludeTechNews',
+        'excludeAnnouncements',
+        'excludeDigests'
+    ]
 
     const {
         register,
@@ -28,6 +54,9 @@ function SearchForm() {
             inn: "7736050003",
             endDate: new Date(2023, 10, 10),
             startDate: new Date(2022, 1, 10),
+            news2: true,
+            news3: false,
+
         },
     });
     const store = { startDate: new Date(2022, 1, 10), endDate: new Date(2023, 10, 10) };
@@ -42,7 +71,7 @@ function SearchForm() {
         //   store.getIDs();
         //   navigate("/result");
         console.log('form_search_data', data);
-        navigate("/results");
+        //navigate("/results");
     };
     const setSearchFormChecks = (str) => {
         console.log(`${str}=true`);
@@ -256,6 +285,17 @@ function SearchForm() {
                             Включать сводки новостей
                         </label>
                     </div>
+                    <div className={style.check}>
+                        <input
+                            id="news3"
+                            type="checkbox"
+                            {...register("news3")}
+                        />
+                        <label htmlFor="news3" className={style.checks_label}>
+                            Включать сводки новостей
+                        </label>
+                    </div>
+                    <SearchCheckbox name="news2" register={register} />
                 </div>
                 <div className={style.button}>
                     <button
@@ -267,6 +307,7 @@ function SearchForm() {
                     </button>
                     <p className={style.required_info}>* Обязательные к заполнению поля</p>
                 </div>
+
             </div>
         </form>
     );
