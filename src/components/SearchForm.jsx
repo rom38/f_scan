@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import style from "../styles/SearchForm.module.css";
 import { useId } from "react";
 
-function SearchCheckbox({ name, register }) {
+function SearchCheckbox({ name, register, text }) {
     const idCheck = useId();
     return (
         <div className={style.check}>
@@ -16,7 +16,7 @@ function SearchCheckbox({ name, register }) {
                 {...register(name)}
             />
             <label htmlFor={idCheck} className={style.checks_label}>
-                Включать сводки новостей
+                {text}
             </label>
         </div>
     )
@@ -33,16 +33,16 @@ function SearchForm() {
     // useEffect(() => {
     //     store.resetSearchFormChecks();
     // });
-    const flagsArray = [
-        'maxFullness',
-        'inBusinessNews',
-        'onlyMainRole',
-        'onlyWithRiskFactors',
-        'excludeTechNews',
-        'excludeAnnouncements',
-        'excludeDigests'
-    ]
 
+    const flagsArrayObj = [
+        { id: 1, flag: 'maxFullness', text: "Признак максимальной полноты" },
+        { id: 2, flag: 'inBusinessNews', text: "Упоминания в бизнес-контексте" },
+        { id: 3, flag: 'onlyMainRole', text: "Главная роль в публикации" },
+        { id: 4, flag: 'onlyWithRiskFactors', text: "Публикации только с риск-факторами" },
+        { id: 5, flag: 'excludeTechNews', text: "Включать технические новости рынков" },
+        { id: 6, flag: 'excludeAnnouncements', text: "Включать анонсы и календари" },
+        { id: 7, flag: 'excludeDigests', text: "Включать сводки новостей" }
+    ]
     const {
         register,
         handleSubmit,
@@ -54,11 +54,25 @@ function SearchForm() {
             inn: "7736050003",
             endDate: new Date(2023, 10, 10),
             startDate: new Date(2022, 1, 10),
-            news2: true,
-            news3: false,
-
+            maxFullness: false,
+            inBusinessNews: false,
+            onlyMainRole: false,
+            onlyWithRiskFactors: false,
+            excludeTechNews: false,
+            excludeAnnouncements: false,
+            excludeDigests: false
         },
     });
+
+    const listSearchCheckbox = flagsArrayObj.map(
+        item =>
+            <SearchCheckbox
+                key={item.id} name={item.flag}
+                register={register} text={item.text}
+            />
+    );
+    // console.log(listSearchCheckbox)
+
     const store = { startDate: new Date(2022, 1, 10), endDate: new Date(2023, 10, 10) };
 
     const onSubmit = (data) => {
@@ -209,94 +223,7 @@ function SearchForm() {
                 </div>
             </div>
             <div className={style.checks_wrapper}>
-                <div className={style.checks}>
-                    <div className={style.check}>
-                        <input
-                            id="fullness"
-                            type="checkbox"
-                            onChange={
-                                () => {
-                                    // store.setSearchFormChecks("isFullness");
-                                    console.log('isFulness=true')
-                                }
-                            }
-                        />
-                        <label htmlFor="fullness" className={style.checks_label}>
-                            Признак максимальной полноты
-                        </label>
-                    </div>
-                    <div className={style.check}>
-                        <input
-                            id="business"
-                            type="checkbox"
-                            onChange={() => setSearchFormChecks("isBusiness")}
-                        />
-                        <label htmlFor="business" className={style.checks_label}>
-                            Упоминания в бизнес-контексте
-                        </label>
-                    </div>
-                    <div className={style.check}>
-                        <input
-                            id="main-role"
-                            type="checkbox"
-                            onChange={() => setSearchFormChecks("isMainRole")}
-                        />
-                        <label htmlFor="main-role" className={style.checks_label}>
-                            Главная роль в публикации
-                        </label>
-                    </div>
-                    <div className={style.check}>
-                        <input
-                            id="risk"
-                            type="checkbox"
-                            onChange={() => setSearchFormChecks("isRisksOnly")}
-                        />
-                        <label htmlFor="risk" className={style.checks_label}>
-                            Публикации только с риск-факторами
-                        </label>
-                    </div>
-                    <div className={style.check}>
-                        <input
-                            id="tech-news"
-                            type="checkbox"
-                            onChange={() => setSearchFormChecks("isTechNews")}
-                        />
-                        <label htmlFor="tech-news" className={style.checks_label}>
-                            Включать технические новости рынков
-                        </label>
-                    </div>
-                    <div className={style.check}>
-                        <input
-                            id="announcement"
-                            type="checkbox"
-                            onChange={() => setSearchFormChecks("isAnnouncement")}
-                        />
-                        <label htmlFor="announcement" className={style.checks_label}>
-                            Включать анонсы и календари
-                        </label>
-                    </div>
-                    <div className={style.check}>
-                        <input
-                            id="news"
-                            type="checkbox"
-                            onChange={() => setSearchFormChecks("isNews")}
-                        />
-                        <label htmlFor="news" className={style.checks_label}>
-                            Включать сводки новостей
-                        </label>
-                    </div>
-                    <div className={style.check}>
-                        <input
-                            id="news3"
-                            type="checkbox"
-                            {...register("news3")}
-                        />
-                        <label htmlFor="news3" className={style.checks_label}>
-                            Включать сводки новостей
-                        </label>
-                    </div>
-                    <SearchCheckbox name="news2" register={register} />
-                </div>
+                {listSearchCheckbox}
                 <div className={style.button}>
                     <button
                         disabled={!isValid}
