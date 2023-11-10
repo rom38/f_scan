@@ -39,9 +39,9 @@ function SearchForm() {
         { id: 2, flag: 'inBusinessNews', text: "Упоминания в бизнес-контексте" },
         { id: 3, flag: 'onlyMainRole', text: "Главная роль в публикации" },
         { id: 4, flag: 'onlyWithRiskFactors', text: "Публикации только с риск-факторами" },
-        { id: 5, flag: 'excludeTechNews', text: "Включать технические новости рынков" },
-        { id: 6, flag: 'excludeAnnouncements', text: "Включать анонсы и календари" },
-        { id: 7, flag: 'excludeDigests', text: "Включать сводки новостей" }
+        { id: 5, flag: 'includeTechNews', text: "Включать технические новости рынков" },
+        { id: 6, flag: 'includeAnnouncements', text: "Включать анонсы и календари" },
+        { id: 7, flag: 'includeDigests', text: "Включать сводки новостей" }
     ]
     const {
         register,
@@ -58,9 +58,9 @@ function SearchForm() {
             inBusinessNews: false,
             onlyMainRole: false,
             onlyWithRiskFactors: false,
-            excludeTechNews: false,
-            excludeAnnouncements: false,
-            excludeDigests: false
+            includeTechNews: false,
+            includeAnnouncements: false,
+            includeDigests: false
         },
     });
 
