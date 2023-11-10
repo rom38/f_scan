@@ -135,11 +135,8 @@ function SearchForm() {
                 </label>
                 <label className={style.label}>
                     Тональность
-                    <select
+                    <select {...register("tonality")}
                         className={style.input}
-                        onChange={(e) => {
-                            console.log('tonality', e.target.value);
-                        }}
                     >
                         <option value={"any"}>Любая</option>
                         <option value={"positive"}>Позитивная</option>
@@ -223,7 +220,10 @@ function SearchForm() {
                 </div>
             </div>
             <div className={style.checks_wrapper}>
-                {listSearchCheckbox}
+                <div className={style.checks}>
+
+                    {listSearchCheckbox}
+                </div>
                 <div className={style.button}>
                     <button
                         disabled={!isValid}
