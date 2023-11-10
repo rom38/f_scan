@@ -85,7 +85,7 @@ function SearchForm() {
         //   store.getIDs();
         //   navigate("/result");
         console.log('form_search_data', data);
-        //navigate("/results");
+        navigate("/results");
     };
     const setSearchFormChecks = (str) => {
         console.log(`${str}=true`);

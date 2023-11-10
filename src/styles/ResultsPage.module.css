@@ -97,6 +97,9 @@
     font-size: 22px;
 }
 
+
+
+
 @media all and (max-width: 768px) {
     .container_1 img {
         width: 347px;

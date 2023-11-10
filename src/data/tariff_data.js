@@ -57,4 +57,6 @@ export const tariff_data = [
     },
 ];
 
-//export const { tariff_data } = { tariff_data }; 
+
+
+//export const { tariff_data } = { tariff_data };

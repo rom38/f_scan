@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import style from "../styles/MainPage.module.css";
-import mainImg1 from "../media/main_img_1.jpg";
+import mainImg1 from "../media/main_img_1.png";
 import mainImg2 from "../media/main_img_2.svg";
 import SimpleSlider from "./MainPageSlider";
 import Tariff from "./MainPageTariff";
