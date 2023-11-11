@@ -5,7 +5,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const api = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://gateway.scan-interfax.ru/api/v1/account',
+        baseUrl: 'https://gateway.scan-interfax.ru/api/v1',
         prepareHeaders: (headers, { getState }) => {
             // By default, if we have a token in the store, let's use that for authenticated requests
             const token = getState().auth.accessToken
@@ -18,14 +18,20 @@ export const api = createApi({
     endpoints: (builder) => ({
         login: builder.mutation({
             query: (credentials) => ({
-                url: 'login',
+                url: 'account/login',
                 method: 'POST',
                 body: credentials,
             }),
-            }),
+        }),
         getCompanies: builder.query({
-            query: () => "info",
-            }),
+            query: () => "account/info",
+        }),
+        getHistograms: builder.query({
+            query: () => ({
+                url: "objectsearch/histograms",
+                method: 'POST',
+            })
+        }),
     }),
 })
 

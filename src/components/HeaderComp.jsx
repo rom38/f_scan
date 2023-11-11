@@ -10,11 +10,22 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { resetCredentials } from "../slicers/authSlice";
 import { useGetCompaniesQuery } from "../services/apiScan";
+import { useNavigate } from "react-router-dom";
 
 
 const InfoWidget2 = () => {
     const store = { token: true, isCompaniesLoading: false };
     const { data, error, isLoading } = useGetCompaniesQuery();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+
+    // console.log(error?.data)
+    if (error?.data.errorCode == "Auth_InvalidAccessToken") {
+        dispatch(resetCredentials());
+        navigate("/");
+
+    }
 
     return (
         <div className={style.info_widget}>{isLoading ? (

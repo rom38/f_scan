@@ -59,11 +59,8 @@ function LoginForm() {
 
     const [isAuthError, setIsAuthError] = useState(false);
     const onSubmit = async (data, e) => {
-        // store.setLogin(data.login);
-        // store.setPassword(data.password);
-        // store.getToken();
+
         e.preventDefault()
-        // console.log('form submit event', e);
         try {
             const credentials = await login(data).unwrap()
             console.log('from rtk')

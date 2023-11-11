@@ -11,13 +11,7 @@ import "../styles/ResultsSlider.css"
 
 const ResultsSlider = () => {
     let date = HistogramDataTest.data[0].data.map((item) =>
-        item.date
-            .substring(0, 10)
-            .split("-")
-            .join(".")
-            .split(".")
-            .reverse()
-            .join(".")
+        item.date.slice(0, 10).split("-").reverse().join(".")
     );
     let total = HistogramDataTest.data[0].data.map((item) => item.value);
     let risks = HistogramDataTest.data[1].data.map((item) => item.value);
@@ -54,7 +48,7 @@ const ResultsSlider = () => {
                         <Slider className={style.summary_slider} {...settings}>
                             {date &&
                                 date.map((el, index) => (
-                                    <div className={style.slider_item} id={index}>
+                                    <div className={style.slider_item} id={index} key={index}>
                                         <p> {date[index]} </p>
                                         <p> {total[index]} </p>
                                         <p> {risks[index]} </p>
