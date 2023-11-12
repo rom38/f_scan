@@ -1,4 +1,10 @@
 // import "./summarySlider.css";
+import { useSelector } from "react-redux";
+import { selectSearchOptions, selectSearchRequest } from "../slicers/searchSlice";
+import { useEffect } from "react";
+import { useGetHistogramsQuery } from "../services/apiScan";
+import { useDispatch } from "react-redux";
+
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -10,11 +16,18 @@ import "../styles/ResultsSlider.css"
 
 
 const ResultsSlider = () => {
-    let date = HistogramDataTest.data[0].data.map((item) =>
+    const dispatch = useDispatch()
+    // dispatch(makeSearchRequest());
+    // const searchRequestData = useSelector(selectSearchRequest);
+    const searchOptions = useSelector(selectSearchOptions);
+    const { data: store, error, isLoading } = useGetHistogramsQuery(makeSearchRequestData(searchOptions));
+    console.log('query histogram', store)
+
+    let date = store.data[0].data.map((item) =>
         item.date.slice(0, 10).split("-").reverse().join(".")
     );
-    let total = HistogramDataTest.data[0].data.map((item) => item.value);
-    let risks = HistogramDataTest.data[1].data.map((item) => item.value);
+    let total = store.data[0].data.map((item) => item.value);
+    let risks = store.data[1].data.map((item) => item.value);
 
     // store.setSummaryDates(date);
     // store.setSummaryTotal(total);
@@ -27,11 +40,11 @@ const ResultsSlider = () => {
     //         return a + b;
     //     })
     // );
-    const store = { isLoading: false }
+    // const store = { isLoading: false }
 
     return (
         <div>
-            {store.isLoading === true ? (
+            {isLoading === true ? (
                 <div className={style.slider_loader}>
                     <p className={style.loading_data}>Загружаем данные</p>
                 </div>
@@ -135,3 +148,80 @@ const HistogramDataTest =
     }]
 }
 
+const makeSearchRequestData = ({ inn, tonality, limit, startDate,
+    endDate, maxFullness, inBusinessNews, onlyMainRole, onlyWithRiskFactors,
+    includeTechNews, includeAnnouncements, includeDigests }) => {
+    const pattern = {
+        "issueDateInterval": {
+            "startDate": "2019-01-01",
+            "endDate": "2022-08-31"
+        },
+        "searchContext": {
+            "targetSearchEntitiesContext": {
+                "targetSearchEntities": [
+                    {
+                        "type": "company",
+                        "sparkId": null,
+                        "entityId": null,
+                        "inn": 7710137066,
+                        "maxFullness": true,
+                        "inBusinessNews": null
+                    }
+                ],
+                "onlyMainRole": true,
+                "tonality": "any",
+                "onlyWithRiskFactors": false,
+                "riskFactors": {
+                    "and": [],
+                    "or": [],
+                    "not": []
+                },
+                "themes": {
+                    "and": [],
+                    "or": [],
+                    "not": []
+                }
+            },
+            "themesFilter": {
+                "and": [],
+                "or": [],
+                "not": []
+            }
+        },
+        "searchArea": {
+            "includedSources": [],
+            "excludedSources": [],
+            "includedSourceGroups": [],
+            "excludedSourceGroups": []
+        },
+        "attributeFilters": {
+            "excludeTechNews": true,
+            "excludeAnnouncements": true,
+            "excludeDigests": true
+        },
+        "similarMode": "duplicates",
+        "limit": 10,
+        "sortType": "sourceInfluence",
+        "sortDirectionType": "desc",
+        "intervalType": "month",
+        "histogramTypes": [
+            "totalDocuments",
+            "riskFactors"
+        ]
+    }
+    pattern['searchContext']['targetSearchEntitiesContext']['targetSearchEntities'][0]['inn'] = inn;
+    pattern['searchContext']['targetSearchEntitiesContext']['targetSearchEntities']['tonality'] = tonality;
+    pattern['limit'] = limit;
+    pattern['issueDateInterval']['startDate'] = startDate.slice(0, 10);
+    pattern['issueDateInterval']['endDate'] = endDate.slice(0, 10);
+    pattern['searchContext']['targetSearchEntitiesContext']['targetSearchEntities'][0]['maxFullness'] = maxFullness;
+    pattern['searchContext']['targetSearchEntitiesContext']['targetSearchEntities'][0]['inBusinessNews'] = inBusinessNews;
+    pattern['searchContext']['targetSearchEntitiesContext']['targetSearchEntities']['onlyMainRole'] = onlyMainRole;
+    pattern['searchContext']['targetSearchEntitiesContext']['targetSearchEntities']['onlyWithRiskFactors'] = onlyWithRiskFactors;
+    // revert
+    pattern['attributeFilters']['excludeTechNews'] = !includeTechNews;
+    pattern['attributeFilters']['excludeAnnouncements'] = !includeAnnouncements;
+    pattern['attributeFilters']['excludeDigests'] = !includeDigests;
+    return pattern
+
+}

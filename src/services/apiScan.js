@@ -27,9 +27,10 @@ export const api = createApi({
             query: () => "account/info",
         }),
         getHistograms: builder.query({
-            query: () => ({
+            query: (data) => ({
                 url: "objectsearch/histograms",
                 method: 'POST',
+                body: data,
             })
         }),
     }),
@@ -37,4 +38,4 @@ export const api = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useLoginMutation, useGetCompaniesQuery } = api
+export const { useLoginMutation, useGetCompaniesQuery, useGetHistogramsQuery } = api

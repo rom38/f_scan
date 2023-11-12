@@ -14,6 +14,9 @@ import loginFacebook from "../media/login_facebook.svg";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useLoginMutation } from "../services/apiScan";
 import { setCredentials } from "../slicers/authSlice";
+import { useSelector } from "react-redux";
+import { setSearchOptions, selectSearchOptions } from "../slicers/searchSlice";
+
 import { useDispatch } from "react-redux";
 
 function LoginPage() {
@@ -36,6 +39,7 @@ function LoginPage() {
 
 function LoginForm() {
     const navigate = useNavigate();
+    const searchOptions = useSelector(selectSearchOptions);
 
     // useEffect(() => {
     //     store.token && navigate("/");
@@ -52,6 +56,10 @@ function LoginForm() {
             login: "sf_student1",
             password: "4i2385j",
         },
+        // defaultValues: {
+        //     login: "sf_student1",
+        //     password: "4i2385j",
+        // },
     });
 
     const [login, { isLoading, error }] = useLoginMutation();

@@ -5,6 +5,14 @@ import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import style from "../styles/SearchForm.module.css";
 import { useId } from "react";
+import { useSelector } from "react-redux";
+import { setSearchOptions, selectSearchOptions } from "../slicers/searchSlice";
+import { useEffect } from "react";
+import { parseISO } from 'date-fns';
+
+
+import { useDispatch } from "react-redux";
+import { parseIsolatedEntityName } from "typescript";
 
 function SearchCheckbox({ name, register, text }) {
     const idCheck = useId();
@@ -25,6 +33,11 @@ function SearchCheckbox({ name, register, text }) {
 
 function SearchForm() {
     const navigate = useNavigate();
+    let searchOptions = useSelector(selectSearchOptions);
+    const dispatch = useDispatch();
+
+    console.log('searchOptions from selector', searchOptions);
+
 
     // useEffect(() => {
     //     !store.token && navigate("/auth");
@@ -47,22 +60,28 @@ function SearchForm() {
         register,
         handleSubmit,
         control,
+        reset,
         formState: { errors, isValid },
     } = useForm({
         mode: "onBlur",
-        defaultValues: {
-            inn: "7736050003",
-            endDate: new Date(2023, 10, 10),
-            startDate: new Date(2022, 1, 10),
-            maxFullness: false,
-            inBusinessNews: false,
-            onlyMainRole: false,
-            onlyWithRiskFactors: false,
-            includeTechNews: false,
-            includeAnnouncements: false,
-            includeDigests: false
-        },
+        defaultValues: { ...searchOptions, endDate: parseISO(searchOptions.endDate), startDate: parseISO(searchOptions.startDate) },
+        // defaultValues: {
+        //     inn: "7736050003",
+        //     endDate: new Date(2023, 10, 10),
+        //     startDate: new Date(2022, 1, 10),
+        //     maxFullness: false,
+        //     inBusinessNews: false,
+        //     onlyMainRole: false,
+        //     onlyWithRiskFactors: false,
+        //     includeTechNews: false,
+        //     includeAnnouncements: false,
+        //     includeDigests: false
+        // },
     });
+
+    useEffect(() => {
+        reset({ ...searchOptions, endDate: new Date(searchOptions.endDate), startDate: new Date(searchOptions.startDate) })
+    }, [searchOptions])
 
     const listSearchCheckbox = flagsArrayObj.map(
         item =>
@@ -85,6 +104,7 @@ function SearchForm() {
         //   store.getIDs();
         //   navigate("/result");
         console.log('form_search_data', data);
+        dispatch(setSearchOptions({ ...data, endDate: data.endDate.toISOString(), startDate: data.startDate.toISOString() }));
         navigate("/results");
     };
     const setSearchFormChecks = (str) => {
@@ -183,10 +203,10 @@ function SearchForm() {
                                         selectsStart
                                         required={true}
                                         className={`${style.input} ${style.dates}`}
-                                        startDate={store.startDate}
+                                        startDate={new Date(searchOptions.startDate)}
                                         dateFormat="dd.MM.yyyy"
-                                        minDate={store.startDate}
-                                        maxDate={store.endDate}
+                                        // minDate={new Date(searchOptions.startDate)}
+                                        maxDate={new Date(searchOptions.endDate)}
                                         fixedHeight
                                         showYearDropdown
                                         placeholderText={'Дата начала'}
@@ -205,9 +225,9 @@ function SearchForm() {
                                         selectsEnd
                                         required={true}
                                         className={`${style.input} ${style.dates}`}
-                                        startDate={store.startDate}
+                                        startDate={new Date(searchOptions.startDate)}
                                         dateFormat="dd.MM.yyyy"
-                                        minDate={store.startDate}
+                                        minDate={new Date(searchOptions.startDate)}
                                         maxDate={new Date()}
                                         fixedHeight
                                         showYearDropdown

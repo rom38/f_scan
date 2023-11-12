@@ -1,37 +1,99 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 
-const initStateLocalStorage = () => {
-    let accessToken = localStorage.getItem('accessToken')
-        ? JSON.parse(localStorage.getItem('accessToken'))
-        : null
-    let expire = localStorage.getItem('expire')
-        ? JSON.parse(localStorage.getItem('expire'))
-        : null
-    // console.log('expire', Date(expire));
-    if (Date(expire) < new Date()) {
-        localStorage.removeItem('expire');
-        localStorage.removeItem('accessToken');
-        accessToken = null;
-        expire = null;
+const initState = () => {
+    let searchOptionsDefault = {
+
+        "inn": "7736050003",
+        "tonality": "any",
+        "limit": "10",
+        "startDate": new Date("2019-01-01").toISOString(),
+        "endDate": new Date("2022-08-31").toISOString(),
+        "maxFullness": false,
+        "inBusinessNews": false,
+        "onlyMainRole": false,
+        "onlyWithRiskFactors": false,
+        "includeTechNews": false,
+        "includeAnnouncements": false,
+        "includeDigests": false,
     }
 
-    return { expire: expire, accessToken: accessToken }
+    let searchRequest = {
+        "issueDateInterval": {
+            "startDate": "2019-01-01",
+            "endDate": "2022-08-31"
+        },
+        "searchContext": {
+            "targetSearchEntitiesContext": {
+                "targetSearchEntities": [
+                    {
+                        "type": "company",
+                        "sparkId": null,
+                        "entityId": null,
+                        "inn": 7710137066,
+                        "maxFullness": true,
+                        "inBusinessNews": null
+                    }
+                ],
+                "onlyMainRole": true,
+                "tonality": "any",
+                "onlyWithRiskFactors": false,
+                "riskFactors": {
+                    "and": [],
+                    "or": [],
+                    "not": []
+                },
+                "themes": {
+                    "and": [],
+                    "or": [],
+                    "not": []
+                }
+            },
+            "themesFilter": {
+                "and": [],
+                "or": [],
+                "not": []
+            }
+        },
+        "searchArea": {
+            "includedSources": [],
+            "excludedSources": [],
+            "includedSourceGroups": [],
+            "excludedSourceGroups": []
+        },
+        "attributeFilters": {
+            "excludeTechNews": true,
+            "excludeAnnouncements": true,
+            "excludeDigests": true
+        },
+        "similarMode": "duplicates",
+        "limit": 10,
+        "sortType": "sourceInfluence",
+        "sortDirectionType": "desc",
+        "intervalType": "month",
+        "histogramTypes": [
+            "totalDocuments",
+            "riskFactors"
+        ]
+    }
+    let searchOptions = localStorage.getItem('searchOptions')
+        ? JSON.parse(localStorage.getItem('searchOptions'))
+        : searchOptionsDefault
+
+    return { searchOptions: searchOptions, searchRequest: searchRequest }
 }
 
 const slice = createSlice({
     name: 'search',
     // initialState: { expire: null, accessToken: null },
-    initialState: initStateLocalStorage,
+    initialState: initState,
     reducers: {
         setSearchOptions: (
             state,
-            { payload: { expire, accessToken } }
+            { payload: searchOptions }
         ) => {
-            state.expire = expire
-            state.accessToken = accessToken
-            localStorage.setItem('expire', JSON.stringify(expire))
-            localStorage.setItem('accessToken', JSON.stringify(accessToken))
+            state.searchOptions = searchOptions;
+            localStorage.setItem('searchOptions', JSON.stringify(searchOptions));
         },
         resetCredentials: (state) => {
             state.expire = null;
@@ -41,12 +103,30 @@ const slice = createSlice({
             // localStorage.clear();
 
         },
+        makeSearchRequest: (state) => {
+            let clone = { ...state };
+            clone.searchRequest['searchContext']['targetSearchEntitiesContext']['targetSearchEntities'][0]['inn'] = JSON.stringify(clone.searchRequest['inn']);
+            clone.searchRequest['searchContext']['targetSearchEntitiesContext']['targetSearchEntities']['tonality'] = clone.searchRequest['tonality'];
+            clone.searchRequest['limit'] = JSON.stringify(clone.searchRequest['limit']);
+            clone.searchRequest['issueDateInterval']['startDate'] = JSON.stringify(clone.searchRequest['startDate']);
+            clone.searchRequest['issueDateInterval']['endDate'] = JSON.stringify(clone.searchRequest['endDate']);
+            clone.searchRequest['searchContext']['targetSearchEntitiesContext']['targetSearchEntities'][0]['maxFullness'] = JSON.stringify(clone.searchRequest['maxFullness']);
+            clone.searchRequest['searchContext']['targetSearchEntitiesContext']['targetSearchEntities'][0]['inBusinessNews'] = JSON.stringify(clone.searchRequest['maxFullness']);
+            clone.searchRequest['searchContext']['targetSearchEntitiesContext']['targetSearchEntities']['onlyMainRole'] = JSON.stringify(clone.searchRequest['onlyMainRole']);
+            clone.searchRequest['searchContext']['targetSearchEntitiesContext']['targetSearchEntities']['onlyWithRiskFactors'] = JSON.stringify(clone.searchRequest['onlyWithRiskFactors']);
+            // revert
+            clone.searchRequest['attributeFilters']['excludeTechNews'] = JSON.stringify(!clone.searchRequest['includeTechNews']);
+            clone.searchRequest['attributeFilters']['excludeAnnouncements'] = JSON.stringify(!clone.searchRequest['includeAnnouncements']);
+            clone.searchRequest['attributeFilters']['excludeDigests'] = JSON.stringify(!clone.searchRequest['includeDigests']);
+            return { ...clone }
+
+        },
     },
 })
 
-export const { setCredentials, resetCredentials } = slice.actions
+export const { makeSearchRequest, setSearchOptions } = slice.actions
 
 export default slice.reducer
 
-export const selectAuthExpire = (state) => state.auth.expire
-export const selectAuthAccessToken = (state) => state.auth.accessToken
+export const selectSearchOptions = (state) => state.search.searchOptions
+export const selectSearchRequest = (state) => state.search.searchRequest
