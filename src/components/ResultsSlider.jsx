@@ -1,4 +1,3 @@
-// import "./summarySlider.css";
 import { useSelector } from "react-redux";
 import { selectSearchOptions, selectSearchRequest } from "../slicers/searchSlice";
 import { selectAuthAccessToken } from "../slicers/authSlice";
@@ -11,9 +10,7 @@ import headerSpinner from "../media/header_spinner.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-// import store from "../../../store/store";
 import style from "../styles/ResultsSlider.module.css";
-// import "./slider.css";
 import "../styles/ResultsSlider.css"
 
 
@@ -25,8 +22,6 @@ const ResultsSlider = () => {
     const [total, setTotal] = useState(null)
     const [risks, setRisks] = useState(null)
     const [sumAll, setSumAll] = useState(null)
-    // dispatch(makeSearchRequest());
-    // const searchRequestData = useSelector(selectSearchRequest);
     const searchOptions = useSelector(selectSearchOptions);
     const accessToken = useSelector(selectAuthAccessToken);
     const { data, error, isLoading } = useGetHistogramsQuery(makeSearchRequestData(searchOptions));
