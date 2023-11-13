@@ -24,7 +24,7 @@ const ResultsSlider = () => {
     const [sumAll, setSumAll] = useState(null)
     const searchOptions = useSelector(selectSearchOptions);
     const accessToken = useSelector(selectAuthAccessToken);
-    const { data, error, isLoading } = useGetHistogramsQuery(makeSearchRequestData(searchOptions));
+    const { data, error, isLoading } = useGetHistogramsQuery(makeSearchRequestData(searchOptions), { refetchOnMountOrArgChange: true });
     useEffect(() => {
         !accessToken && navigate("/");
         setHistogramData(data);

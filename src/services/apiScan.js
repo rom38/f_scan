@@ -33,9 +33,29 @@ export const api = createApi({
                 body: data,
             })
         }),
+        getObjects: builder.query({
+            query: (data) => ({
+                url: "objectsearch",
+                method: 'POST',
+                body: data,
+            })
+        }),
+        getDocuments: builder.query({
+            query: (data) => ({
+                url: "documents",
+                method: 'POST',
+                body: data,
+            }),
+            transformResponse: (response) => {
+                // console.log('response',response)
+                return response[0].ok
+            }
+        }),
     }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useLoginMutation, useGetCompaniesQuery, useGetHistogramsQuery } = api
+export const { useLoginMutation, useGetCompaniesQuery,
+    useGetHistogramsQuery, useGetObjectsQuery, useGetDocumentsQuery
+} = api

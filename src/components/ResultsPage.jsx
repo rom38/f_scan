@@ -5,6 +5,7 @@ import SimpleSlider from "./MainPageSlider";
 import Tariff from "./MainPageTariff";
 import { Link } from "react-router-dom";
 import ResultsSlider from "./ResultsSlider";
+import Documents from "./ResultsDocuments";
 
 function ResultsPage() {
     const store = { token: true };
@@ -28,8 +29,7 @@ function ResultsPage() {
             <div className={style.header_2}>
                 Список документов
             </div>
-
-            <Tariff />
+            <Documents />
         </>
     );
 }
