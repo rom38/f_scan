@@ -1,10 +1,13 @@
 // import "./summarySlider.css";
 import { useSelector } from "react-redux";
 import { selectSearchOptions, selectSearchRequest } from "../slicers/searchSlice";
-import { useEffect } from "react";
+import { selectAuthAccessToken } from "../slicers/authSlice";
+
+import { useEffect, useState } from "react";
 import { useGetHistogramsQuery } from "../services/apiScan";
 import { useDispatch } from "react-redux";
 
+import headerSpinner from "../media/header_spinner.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -17,41 +20,66 @@ import "../styles/ResultsSlider.css"
 
 const ResultsSlider = () => {
     const dispatch = useDispatch()
+    const [histogramData, setHistogramData] = useState(null)
+    const [date, setDate] = useState(null)
+    const [total, setTotal] = useState(null)
+    const [risks, setRisks] = useState(null)
+    const [sumAll, setSumAll] = useState(null)
     // dispatch(makeSearchRequest());
     // const searchRequestData = useSelector(selectSearchRequest);
     const searchOptions = useSelector(selectSearchOptions);
-    const { data: store, error, isLoading } = useGetHistogramsQuery(makeSearchRequestData(searchOptions));
-    console.log('query histogram', store)
+    const accessToken = useSelector(selectAuthAccessToken);
+    const { data, error, isLoading } = useGetHistogramsQuery(makeSearchRequestData(searchOptions));
+    useEffect(() => {
+        !accessToken && navigate("/");
+        setHistogramData(data);
+    }, [data]);
 
-    let date = store.data[0].data.map((item) =>
-        item.date.slice(0, 10).split("-").reverse().join(".")
-    );
-    let total = store.data[0].data.map((item) => item.value);
-    let risks = store.data[1].data.map((item) => item.value);
+    console.log('query histogram', data)
 
-    // store.setSummaryDates(date);
-    // store.setSummaryTotal(total);
-    // store.setSummaryRisks(risks);
-    // store.setSummaryAll(
-    //     store.summaryTotal.reduce((a, b) => {
-    //         return a + b;
-    //     }) +
-    //     store.summaryRisks.reduce((a, b) => {
-    //         return a + b;
-    //     })
-    // );
-    // const store = { isLoading: false }
+    useEffect(() => {
+        !accessToken && navigate("/");
+    });
+
+    useEffect(() => {
+        if (histogramData) {
+
+            console.log('in use effect', data)
+
+            let date_l = histogramData.data[0].data.map((item) =>
+                item.date.slice(0, 10).split("-").reverse().join(".")
+            );
+            let total_l = histogramData.data[0].data.map((item) => item.value);
+            let risks_l = histogramData.data[1].data.map((item) => item.value);
+            let sumAll_l = (
+                total_l.reduce((a, b) => {
+                    return a + b;
+                }) +
+                risks_l.reduce((a, b) => {
+                    return a + b;
+                })
+            );
+            setDate(date_l)
+            setTotal(total_l)
+            setRisks(risks_l)
+            setSumAll(sumAll_l)
+
+        }
+
+    }, [histogramData]);
+
 
     return (
         <div>
-            {isLoading === true ? (
+            {isLoading ? (
                 <div className={style.slider_loader}>
+                    <img className={style.lds} src={headerSpinner} />
                     <p className={style.loading_data}>Загружаем данные</p>
                 </div>
             ) : (
                 <>
                     <h3 className={style.summary_title}>Общая сводка</h3>
-                    <p className={style.summary_all}>Найдено {store.summaryAll} вариантов</p>
+                    <p className={style.summary_all}>Найдено {sumAll} вариантов</p>
                     <div className={style.slider_wrapper}>
                         <div className={style.slider_titles}>
                             <p>Период</p>
