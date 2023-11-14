@@ -1,5 +1,5 @@
 .document {
-    width: 47%;
+    width: 42%;
     border-radius: 10px;
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
     padding: 20px 30px;
@@ -35,6 +35,8 @@
     letter-spacing: 0.52px;
     margin: 25px 0;
 }
+
+
 
 .tag {
     position: absolute;

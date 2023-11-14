@@ -63,7 +63,7 @@ const Documents = () => {
 
     return (
         <div className={style.wrapper}>
-            <h3 className="summary-title documents-title">Список документов</h3>
+            <h3 className={`${style.summary_title} ${style.title}`}>Список документов</h3>
             <div className={style.documents}>
                 {data?.items &&
                     data.items.map((el) => (

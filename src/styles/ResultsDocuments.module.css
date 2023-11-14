@@ -14,6 +14,16 @@
     margin: 60px 0;
 }
 
+.summary_title {
+    color: #000;
+    font-size: 30px;
+    font-family: Ferry;
+    font-weight: 900;
+    letter-spacing: 0.6px;
+    text-align: left;
+
+}
+
 .button_active {
     background: var(--main-color-blue);
     width: 300px;
