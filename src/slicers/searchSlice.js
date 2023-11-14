@@ -1,16 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { useLocalStorage } from '../hooks/useLocalStorage'
 
 const initState = () => {
     let searchOptionsDefault = {
 
         "inn": "7736050003",
         "tonality": "any",
-        "limit": "10",
+        "limit": "35",
         "startDate": new Date("2019-01-01").toISOString(),
-        "endDate": new Date("2022-08-31").toISOString(),
+        "endDate": new Date("2023-08-31").toISOString(),
         "maxFullness": false,
-        "inBusinessNews": false,
+        "inBusinessNews": true,
         "onlyMainRole": false,
         "onlyWithRiskFactors": false,
         "includeTechNews": false,
