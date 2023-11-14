@@ -31,7 +31,7 @@ const ResultsSlider = () => {
     console.log('query histogram', data)
 
     useEffect(() => {
-        if (histogramData) {
+        if (histogramData && histogramData.data.length && histogramData.data[0].data.length ) {
 
             console.log('in use effect', data)
 

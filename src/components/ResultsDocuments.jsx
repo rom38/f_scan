@@ -61,7 +61,7 @@ const Documents = () => {
             <div className={style.documents}>
                 {data?.items &&
                     data.items.slice(0, nextDocs).map((el) => (
-                        <Document idDoc={el.encodedId} key={el.encodedId.slice(3, 10)} />
+                        <Document idDoc={el.encodedId} key={el.encodedId.slice(0, 10)} />
                     ))}
             </div>
             {isLoading ? (

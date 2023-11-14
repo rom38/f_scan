@@ -6,11 +6,7 @@ import style from "../styles/MainPageTariff.module.css";
 import checkpoint from "../media/tariff_check.svg";
 import { tariff_data } from "../data/tariff_data";
 
-//const Tariff = observer(() => {
 const Tariff = () => {
-    // useEffect(() => {
-    //   store.checkToken();
-    // }, []);
     const store = { "token": "1" };
     const accessToken = useSelector(selectAuthAccessToken);
 
@@ -66,7 +62,7 @@ const Tariff = () => {
                                 : style.button
                         }
                     >
-                        <Link to="/error">
+                        <Link to="/about">
                             {accessToken && item.id === 1
                                 ? "Перейти в личный кабинет"
                                 : "Подробнее"}

@@ -1,7 +1,7 @@
 import { selectAuthAccessToken } from "../slicers/authSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import style from "../styles/MainPage.module.css";
 import mainImg1 from "../media/main_img_1.png";
@@ -12,6 +12,7 @@ import Tariff from "./MainPageTariff";
 function MainPage() {
     // const store = { token: false };
     const accessToken = useSelector(selectAuthAccessToken);
+    const navigate = useNavigate()
     return (
         <>
             <div className={style.container_1}>
@@ -24,13 +25,15 @@ function MainPage() {
                         Комплексный анализ публикаций, получение данных<br />
                         в формате PDF на электронную почту.
                     </p>
-                    <button className={style.button_1}>
-                        {accessToken ? (
-                            <Link to="/search">Запросить данные</Link>
-                        ) : (
-                            <Link to="/login">Войти</Link>
-                        )}
-                    </button>
+                    {accessToken ? (
+                        <button className={style.button_1} onClick={() => navigate("/search")} >
+                            Запросить данные
+                        </button>) :
+                        (<button className={style.button_1} onClick={() => navigate("/login")} >
+                            Войти
+                        </button>)
+                    }
+
                 </div>
                 <img src={mainImg1} alt="" />
             </div >
