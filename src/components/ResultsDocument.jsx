@@ -3,11 +3,7 @@ import style from "../styles/ResultsDocument.module.css";
 
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectSearchOptions, selectSearchRequest } from "../slicers/searchSlice";
-import { selectAuthAccessToken } from "../slicers/authSlice";
 import { useGetDocumentsQuery } from "../services/apiScan"
-
 
 import fakeImg from "../media/fake_img.png";
 
@@ -16,14 +12,11 @@ const Document = ({ idDoc }) => {
     let xmlImg = fakeImg;
     const regString = /<.*?>|;.*?;|&.*?t|s.*?;|\?.*?\d|\/.*?\s|(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)/g
 
-    const emptyObject = {}
-
     const { data, error, isLoading, isSuccess, isError } = useGetDocumentsQuery({
-        "ids": [idDoc
-        ]
+        "ids": [idDoc]
     },
         {
-            refetchOnMountOrArgChange: true,
+            // refetchOnMountOrArgChange: true,
             selectFromResult: ({ data }) => ({
                 data: data?.[0]?.ok ?? null
             })
@@ -37,12 +30,12 @@ const Document = ({ idDoc }) => {
 
     if (isError) return <div>An error has occurred!</div>
     // if (isSuccess) return <div>Success!!!</div>
-    if (!data) return <div>Missing post!</div>
+    if (!data) return <div className={style.document}>Loading or Missing post!</div>
 
     if (data) return (
         <div className={style.document}>
             <div className={style.top}>
-                <p className={style.date}>{data.issueDate}</p>
+                <span className={style.date}>{data.issueDate.slice(0, 10).split("-").reverse().join(".")}</span>
                 <Link className={style.date} to={data.url} target={"_blank"}>
                     {data.source.name}
                 </Link>

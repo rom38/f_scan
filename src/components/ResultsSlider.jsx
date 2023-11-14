@@ -23,18 +23,12 @@ const ResultsSlider = () => {
     const [risks, setRisks] = useState(null)
     const [sumAll, setSumAll] = useState(null)
     const searchOptions = useSelector(selectSearchOptions);
-    const accessToken = useSelector(selectAuthAccessToken);
     const { data, error, isLoading } = useGetHistogramsQuery(makeSearchRequestData(searchOptions), { refetchOnMountOrArgChange: true });
     useEffect(() => {
-        // !accessToken && navigate("/");
         setHistogramData(data);
     }, [data]);
 
     console.log('query histogram', data)
-
-    // useEffect(() => {
-    //     !accessToken && navigate("/");
-    // });
 
     useEffect(() => {
         if (histogramData) {
@@ -66,11 +60,14 @@ const ResultsSlider = () => {
 
     return (
         <div>
-            {isLoading ? (
+            {isLoading ? (<>
+                <h3 className={style.summary_title}>Общая сводка</h3>
+                <p className={style.summary_all}>Найдено 0 вариантов</p>
                 <div className={style.slider_loader}>
                     <img className={style.lds} src={headerSpinner} />
                     <p className={style.loading_data}>Загружаем данные</p>
                 </div>
+            </>
             ) : (
                 <>
                     <h3 className={style.summary_title}>Общая сводка</h3>

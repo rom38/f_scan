@@ -10,9 +10,7 @@ import { setSearchOptions, selectSearchOptions } from "../slicers/searchSlice";
 import { useEffect } from "react";
 import { parseISO } from 'date-fns';
 
-
 import { useDispatch } from "react-redux";
-import { parseIsolatedEntityName } from "typescript";
 
 function SearchCheckbox({ name, register, text }) {
     const idCheck = useId();
@@ -30,7 +28,6 @@ function SearchCheckbox({ name, register, text }) {
     )
 }
 
-
 function SearchForm() {
     const navigate = useNavigate();
     let searchOptions = useSelector(selectSearchOptions);
@@ -38,13 +35,8 @@ function SearchForm() {
 
     console.log('searchOptions from selector', searchOptions);
 
-
     // useEffect(() => {
-    //     !store.token && navigate("/auth");
-    // });
-
-    // useEffect(() => {
-    //     store.resetSearchFormChecks();
+    //     resetSearchFormChecks();
     // });
 
     const flagsArrayObj = [

@@ -5,6 +5,8 @@
     padding: 20px 30px;
     margin: 0 20px 40px;
     display: grid;
+    font-family: Inter;
+    text-align: left;
 }
 
 .top {
@@ -39,7 +41,7 @@
 
 
 .tag {
-    position: absolute;
+    /* position: absolute; */
     border-radius: 5px;
     background: var(--main-color-yellow);
     font-size: 12px;
@@ -47,6 +49,7 @@
     text-align: center;
     padding: 4px 15px;
     bottom: -8px;
+    margin-right: 10px;
 }
 
 .announcement {
@@ -75,6 +78,10 @@
     opacity: 0.5;
     height: 255px;
     overflow: hidden;
+    font-family: Inter;
+    font-style: normal;
+    line-height: normal;
+    text-align: left;
 }
 
 .bottom {

@@ -10,13 +10,12 @@ import Document from "./ResultsDocument";
 
 import { useSelector } from "react-redux";
 import { selectSearchOptions, selectSearchRequest } from "../slicers/searchSlice";
-import { selectAuthAccessToken } from "../slicers/authSlice";
 
 const Documents = () => {
     const [isActive, setActive] = useState(true);
-    const [nextDocs, setNextDocs] = useState(10);
+    const numDocs = 10;
+    const [nextDocs, setNextDocs] = useState(numDocs);
     const searchOptions = useSelector(selectSearchOptions);
-    const accessToken = useSelector(selectAuthAccessToken);
     const { data, error, isLoading } = useGetObjectsQuery(makeSearchRequestData(searchOptions));//, { refetchOnMountOrArgChange: true });
 
     useEffect(() => {
@@ -32,13 +31,10 @@ const Documents = () => {
         if (data) {
             setActive(false);
             if (data.items[0] !== undefined) {
-                if (data.items.length <= 10) {
-                    // store.getFirstDocuments();
+                if (data.items.length <= numDocs) {
                     setActive(false);
                     return;
                 } else {
-                    let next = data.items.slice(0, nextDocs);
-                    //store.getNextDocuments(next);
                     setActive(true);
                 }
             }
@@ -46,9 +42,7 @@ const Documents = () => {
     }, [data]);
 
     const showNextDocs = () => {
-        let next = data.IDs.slice(nextDocs, nextDocs + 10);
-        //store.getNextDocuments(next);
-        setNextDocs(nextDocs + 10);
+        setNextDocs(nextDocs => nextDocs + numDocs);
     };
 
     // if (!store.document) {
@@ -66,27 +60,8 @@ const Documents = () => {
             <h3 className={`${style.summary_title} ${style.title}`}>Список документов</h3>
             <div className={style.documents}>
                 {data?.items &&
-                    data.items.map((el) => (
-                        <>
-                            <Document idDoc={el.encodedId} />
-                        </>
-                        // <Document
-                        //     issueDate={el.ok.issueDate
-                        //         .substring(0, 10)
-                        //         .split("-")
-                        //         .join(".")
-                        //         .split(".")
-                        //         .reverse()
-                        //         .join(".")}
-                        //     source={el.ok.source.name}
-                        //     title={el.ok.title.text}
-                        //     isTechNews={el.ok.attributes.isTechNews}
-                        //     isAnnouncement={el.ok.attributes.isAnnouncement}
-                        //     isDigest={el.ok.attributes.isDigest}
-                        //     content={el.ok.content.markup}
-                        //     link={el.ok.url}
-                        //     wordCount={el.ok.attributes.wordCount}
-                        // />
+                    data.items.slice(0, nextDocs).map((el) => (
+                        <Document idDoc={el.encodedId} key={el.encodedId.slice(3, 10)} />
                     ))}
             </div>
             {isLoading ? (
