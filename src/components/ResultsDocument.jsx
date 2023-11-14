@@ -11,46 +11,40 @@ import { useGetDocumentsQuery } from "../services/apiScan"
 
 import fakeImg from "../media/fake_img.png";
 
-const Document = (props) => {
-    let xmlImg = "";
-    const regString = RegExp`/<.*?>|
-        ;.*?;|
-        &.*?t|
-        s.*?;|
-        \?.*?\d|
-        \/.*?\s|
-        (https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)/g`
+const Document = ({ idDoc }) => {
+    // let xmlImg = "";
+    let xmlImg = fakeImg;
+    const regString = /<.*?>|;.*?;|&.*?t|s.*?;|\?.*?\d|\/.*?\s|(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)/g
 
-    const { data, error, isLoading } = useGetDocumentsQuery({
-        "ids": ["1:0JPQqdGM0JNWCdCzf2Jt0LHQotGV0ZUh0ZbRlBXCt0Je0JHQruKAnDcUXkZQ0YvQscKnehLRnNC1KtGK0Ll9BWLigLo/HXXCrhw="
+    const emptyObject = {}
+
+    const { data, error, isLoading, isSuccess, isError } = useGetDocumentsQuery({
+        "ids": [idDoc
         ]
-    }, { refetchOnMountOrArgChange: true });
+    },
+        {
+            refetchOnMountOrArgChange: true,
+            selectFromResult: ({ data }) => ({
+                data: data?.[0]?.ok ?? null
+            })
+        });
 
     useEffect(() => {
         if (data) {
-            console.log('in useeffect document', data)
-            setActive(false);
-            if (data.items[0] !== undefined) {
-
-                if (data.ok.content.markup.match(/https?:\/\/\S+"/g) === null) {
-                    xmlImg = fakeImg;
-                } else {
-                    xmlImg = props.content
-                        .match(/https?:\/\/\S+"/g)
-                        .toString()
-                        .replace('"', "");
-                }
-            }
+            console.log('in useeffect document 2', data)
         }
     }, [data]);
 
+    if (isError) return <div>An error has occurred!</div>
+    // if (isSuccess) return <div>Success!!!</div>
+    if (!data) return <div>Missing post!</div>
 
-    return (data &&
+    if (data) return (
         <div className={style.document}>
             <div className={style.top}>
                 <p className={style.date}>{data.issueDate}</p>
-                <Link className={style.date} to={data.attributes.wordCount} target={"_blank"}>
-                    {data.source}
+                <Link className={style.date} to={data.url} target={"_blank"}>
+                    {data.source.name}
                 </Link>
             </div>
             <div className={style.title_tag}>
@@ -69,12 +63,6 @@ const Document = (props) => {
             <p className={style.content}>
                 {data.content.markup
                     .replace(regString, "")
-                    // .replace(/;.*?;/g, "")
-                    // .replace(/&.*?t/g, "")
-                    // .replace(/s.*?;/g, "")
-                    // .replace(/\?.*?\d/g, "")
-                    // .replace(/\/.*?\s/g, "")
-                    // .replace(/(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2, 6})([/\w .-]*)/g, "")
                 }
             </p>
             <div className={style.bottom}>

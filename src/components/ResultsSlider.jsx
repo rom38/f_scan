@@ -26,15 +26,15 @@ const ResultsSlider = () => {
     const accessToken = useSelector(selectAuthAccessToken);
     const { data, error, isLoading } = useGetHistogramsQuery(makeSearchRequestData(searchOptions), { refetchOnMountOrArgChange: true });
     useEffect(() => {
-        !accessToken && navigate("/");
+        // !accessToken && navigate("/");
         setHistogramData(data);
     }, [data]);
 
     console.log('query histogram', data)
 
-    useEffect(() => {
-        !accessToken && navigate("/");
-    });
+    // useEffect(() => {
+    //     !accessToken && navigate("/");
+    // });
 
     useEffect(() => {
         if (histogramData) {

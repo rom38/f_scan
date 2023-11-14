@@ -6,9 +6,21 @@ import Tariff from "./MainPageTariff";
 import { Link } from "react-router-dom";
 import ResultsSlider from "./ResultsSlider";
 import Documents from "./ResultsDocuments";
+import { selectAuthAccessToken } from "../slicers/authSlice";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+
 
 function ResultsPage() {
-    const store = { token: true };
+    const accessToken = useSelector(selectAuthAccessToken);
+    const navigate = useNavigate();
+    useEffect(() => {
+        !accessToken && navigate("/");
+    });
+
+
     return (
         <>
             <div className={style.container_1}>

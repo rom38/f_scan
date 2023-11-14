@@ -17,7 +17,7 @@ const Documents = () => {
     const [nextDocs, setNextDocs] = useState(10);
     const searchOptions = useSelector(selectSearchOptions);
     const accessToken = useSelector(selectAuthAccessToken);
-    const { data, error, isLoading } = useGetObjectsQuery(makeSearchRequestData(searchOptions), { refetchOnMountOrArgChange: true });
+    const { data, error, isLoading } = useGetObjectsQuery(makeSearchRequestData(searchOptions));//, { refetchOnMountOrArgChange: true });
 
     useEffect(() => {
         if (data) {
@@ -68,8 +68,7 @@ const Documents = () => {
                 {data?.items &&
                     data.items.map((el) => (
                         <>
-                            <li>привет</li>
-                            <Document />
+                            <Document idDoc={el.encodedId} />
                         </>
                         // <Document
                         //     issueDate={el.ok.issueDate

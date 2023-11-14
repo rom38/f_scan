@@ -46,10 +46,10 @@ export const api = createApi({
                 method: 'POST',
                 body: data,
             }),
-            transformResponse: (response) => {
-                // console.log('response',response)
-                return response[0].ok
-            }
+            // transformResponse: (response) => {
+            //     // console.log('response',response)
+            //     return response[0].ok
+            // }
         }),
     }),
 })
