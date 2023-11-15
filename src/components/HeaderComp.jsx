@@ -113,8 +113,8 @@ const HeaderComp = () => {
                 {/* {accessToken && (<>{infoWidget}</>)} */}
                 {accessToken && <InfoWidget2 />}
                 {accessToken ? userInfo : loginInfo}
-                <MenuComp />
 
+                <MenuComp />
             </div>
         </header>
     )

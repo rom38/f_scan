@@ -236,7 +236,7 @@
 
 
 
-@media all and (max-width: 768px) {
+@media all and (max-width: 850px) {
     footer>img {
         height: 111px;
         width: 111px;
@@ -244,5 +244,14 @@
 
     footer {
         height: 110px;
+    }
+
+    .headerCol2>a {
+        display: none;
+    }
+
+    .header_user,
+    .header_user_image {
+        display: none;
     }
 }
