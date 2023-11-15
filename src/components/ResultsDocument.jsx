@@ -22,11 +22,11 @@ const Document = ({ idDoc }) => {
             })
         });
 
-    useEffect(() => {
-        if (data) {
-            console.log('in useeffect document 2', data)
-        }
-    }, [data]);
+    // useEffect(() => {
+    //     if (data) {
+    //         console.log('in useeffect document 2', data)
+    //     }
+    // }, [data]);
 
     if (isError) return <div>An error has occurred!</div>
     // if (isSuccess) return <div>Success!!!</div>

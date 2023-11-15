@@ -25,15 +25,13 @@ const ResultsSlider = () => {
     const { data, error, isLoading } = useGetHistogramsQuery(makeSearchRequestData(searchOptions), { refetchOnMountOrArgChange: true });
     useEffect(() => {
         setHistogramData(data);
+        console.log('query histogram', data)
     }, [data]);
 
-    console.log('query histogram', data)
 
     useEffect(() => {
         if (histogramData && histogramData.data.length && histogramData.data[0].data.length) {
-
-            console.log('in use effect', data)
-
+            // console.log('in use effect ', data)
             let date_l = histogramData.data[0].data.map((item) =>
                 item.date.slice(0, 10).split("-").reverse().join(".")
             );
@@ -55,7 +53,6 @@ const ResultsSlider = () => {
         }
 
     }, [histogramData]);
-
 
     return (
         <div>

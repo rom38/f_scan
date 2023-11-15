@@ -33,11 +33,11 @@ function SearchForm() {
     let searchOptions = useSelector(selectSearchOptions);
     const dispatch = useDispatch();
 
-    console.log('searchOptions from selector', searchOptions);
 
-    // useEffect(() => {
-    //     resetSearchFormChecks();
-    // });
+    useEffect(() => {
+        // resetSearchFormChecks();
+        console.log('searchOptions from selector', searchOptions);
+    }, [searchOptions]);
 
     const flagsArrayObj = [
         { id: 1, flag: 'maxFullness', text: "Признак максимальной полноты" },
@@ -57,18 +57,7 @@ function SearchForm() {
     } = useForm({
         mode: "onBlur",
         defaultValues: { ...searchOptions, endDate: parseISO(searchOptions.endDate), startDate: parseISO(searchOptions.startDate) },
-        // defaultValues: {
-        //     inn: "7736050003",
-        //     endDate: new Date(2023, 10, 10),
-        //     startDate: new Date(2022, 1, 10),
-        //     maxFullness: false,
-        //     inBusinessNews: false,
-        //     onlyMainRole: false,
-        //     onlyWithRiskFactors: false,
-        //     includeTechNews: false,
-        //     includeAnnouncements: false,
-        //     includeDigests: false
-        // },
+
     });
 
     useEffect(() => {
@@ -87,14 +76,6 @@ function SearchForm() {
     const store = { startDate: new Date(2022, 1, 10), endDate: new Date(2023, 10, 10) };
 
     const onSubmit = (data) => {
-        //   store.setSummaryError(false);
-        //   store.setInn(data.inn);
-        //   store.setLimit(data.limit);
-        //   store.getHistograms();
-        //   store.setDocument([]);
-        //   store.setIDs({});
-        //   store.getIDs();
-        //   navigate("/result");
         console.log('form_search_data', data);
         dispatch(setSearchOptions({ ...data, endDate: data.endDate.toISOString(), startDate: data.startDate.toISOString() }));
         navigate("/results");
