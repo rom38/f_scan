@@ -92,7 +92,7 @@ function LoginForm() {
                     <Link to="/auth">Войти</Link>
                 </button>
                 <button >
-                    <Link to="/error">Зарегистрироваться</Link>
+                    <Link to="/about">Зарегистрироваться</Link>
                 </button>
             </div>
             <label className={style.label}>
@@ -135,7 +135,7 @@ function LoginForm() {
             >
                 Войти
             </button>
-            <Link className={style.restore_pass} to="/error">
+            <Link className={style.restore_pass} to="/about">
                 Восстановить пароль
             </Link>
             <p className={style.sign_social_text}>Войти через:</p>

@@ -28,10 +28,11 @@ function MainPage() {
                     {accessToken ? (
                         <button className={style.button_1} onClick={() => navigate("/search")} >
                             Запросить данные
-                        </button>) :
-                        (<button className={style.button_1} onClick={() => navigate("/login")} >
-                            Войти
-                        </button>)
+                        </button>) : (<></>)
+                        // (<button className={style.button_1} onClick={() => navigate("/login")} >
+                        //     Войти
+                        // </button>)
+
                     }
 
                 </div>
