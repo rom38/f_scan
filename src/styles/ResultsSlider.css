@@ -46,4 +46,9 @@
         .slick-list {
             height: 65px;
         }
+
+        .slick-slide {
+            margin-right: 53px;
+
+        }
     }

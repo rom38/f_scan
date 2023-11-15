@@ -261,4 +261,13 @@
     .login_info {
         display: none;
     }
+
+    .info_widget {
+
+        margin-right: 0px;
+        width: 100px;
+        height: 60px;
+
+
+    }
 }

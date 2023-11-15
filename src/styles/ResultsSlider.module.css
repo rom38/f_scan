@@ -1,4 +1,4 @@
-.slider-wrapper {
+.slider_wrapper {
     position: relative;
 }
 
@@ -55,7 +55,7 @@
         font-weight: 400;
         line-height: 15px;
         letter-spacing: 0.03em;
-        text-align: left;
+        /* text-align: left; */
 
         display: flex !important;
         align-items: center;
@@ -126,10 +126,19 @@
     }
 
     .summary_slider {
-        height: 65px;
+        height: 60px;
         margin: 0;
         border-radius: 0px 0px 10px 10px;
+        width: auto;
 
-
+        .slider_item {
+            border-right: 0px;
+            flex-direction: row;
+            justify-content: space-around;
+            /* flex-direction: row;
+            justify-content: space-around; */
+            margin-right: 10px;
+        }
     }
+
 }

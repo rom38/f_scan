@@ -52,4 +52,8 @@
     .slick-next {
         right: -20px !important;
     }
+
+    .slick-list {
+        height: 100% !important;
+    }
 }
