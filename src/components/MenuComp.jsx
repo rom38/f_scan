@@ -5,7 +5,7 @@ import { selectAuthAccessToken } from "../slicers/authSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { resetCredentials } from "../slicers/authSlice";
 
-import scan from "../media/scan_logo_2.svg";
+import scan from "../media/scan_logo_1.svg";
 import userImg from "../media/header_user_img.png";
 import style from "../styles/MenuComp.module.css";
 
@@ -28,13 +28,8 @@ const MenuComp = () => {
                 <span></span>
             </label>
 
-            <ul className={style.menu_box}>
-                <li><a className={style.menu_item} href="#">Home</a></li>
-                <li><a className={style.menu_item} href="#">About</a></li>
-                <li><a className={style.menu_item} href="#">Team</a></li>
-                <li><a className={style.menu_item} href="#">Contact</a></li>
-                <li><a className={style.menu_item} href="#">Twitter</a></li>
-            </ul>
+
+            <img className={style.logo} src={scan} alt="" />
             <ul className={style.menu_box}>
                 <li>
 
