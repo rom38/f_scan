@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { resetCredentials } from "../slicers/authSlice";
 import { useGetCompaniesQuery } from "../services/apiScan";
 import { useNavigate } from "react-router-dom";
+import MenuComp from "./MenuComp";
 
 
 const InfoWidget2 = () => {
@@ -86,8 +87,6 @@ const HeaderComp = () => {
                 <button
                     className="logout"
                     onClick={() => {
-                        // store.setToken("");
-                        // localStorage.clear();
                         dispatch(resetCredentials());
                     }}
                 >
@@ -114,6 +113,7 @@ const HeaderComp = () => {
                 {/* {accessToken && (<>{infoWidget}</>)} */}
                 {accessToken && <InfoWidget2 />}
                 {accessToken ? userInfo : loginInfo}
+                <MenuComp />
 
             </div>
         </header>

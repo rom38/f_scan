@@ -1,8 +1,107 @@
 .button_open {
-    display: none;
+    /* display: none; */
 }
 
-@media all and (max-width: 850px) {
+
+.menu_toggle {
+    opacity: 0;
+}
+
+.menu_toggle:checked+.menu_btn>span {
+    transform: rotate(45deg);
+    background-color: white;
+}
+
+.menu_toggle:checked+.menu_btn>span::before {
+    top: 0;
+    transform: rotate(0deg);
+    background-color: white;
+
+}
+
+.menu_toggle:checked+.menu_btn>span::after {
+    top: 0;
+    transform: rotate(90deg);
+    background-color: white;
+
+}
+
+.menu_toggle:checked~.menu_box {
+    left: 0 !important;
+}
+
+.menu_btn {
+    /* position: fixed; */
+    position: relative;
+    /* top: 20px; */
+    /* left: 20px; */
+    display: block;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.menu_btn>span,
+.menu_btn>span::before,
+.menu_btn>span::after {
+    display: block;
+    /* border-color: var(--main-color-green); */
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--main-color-green);
+    transition-duration: .25s;
+}
+
+.menu_btn>span::before {
+    content: '';
+    top: -8px;
+}
+
+.menu_btn>span::after {
+    content: '';
+    top: 8px;
+}
+
+.menu_box {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 80px 0;
+    list-style: none;
+    background-color: var(--main-color-green);
+    /* background-color: #ECEFF1; */
+
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
+    transition-duration: .25s;
+}
+
+.menu_item {
+    display: block;
+    padding: 12px 24px;
+    color: #333;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration: none;
+    transition-duration: .25s;
+}
+
+.menu_item:hover {
+    background-color: #CFD8DC;
+}
+
+
+
+
+
+
+@media all and (max-width: 1850px) {
     .button_open {
         display: flex;
         background-image: url(../../../assets/images/button-open.svg);
@@ -42,18 +141,37 @@
     }
 
     .nav {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        /* display: flex; */
+        /* flex-direction: column; */
+        /* align-items: center; */
+
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 100%;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 80px 0;
+        list-style: none;
+        background-color: var(--main-color-green);
+        /* background-color: #ECEFF1; */
+
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
+        transition-duration: .25s;
     }
 
-    .nav_link {
+    a.nav_link {
+        display: block;
+        padding: 5px 24px;
+        font-family: Inter;
         color: #fff;
         font-size: 16px;
         line-height: 19px;
         letter-spacing: var(--letter-spacing);
         text-decoration: none;
         margin-bottom: 26px;
+        transition-duration: .25s;
     }
 
     .not_signed {
