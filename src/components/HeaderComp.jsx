@@ -74,11 +74,11 @@ const HeaderComp = () => {
     );
 
     let loginInfo = (
-        <>
+        <div className={style.login_info}>
             <p>Зарегистрироваться</p>
             <div className={style.divVertStick}></div>
             <NavLink to="/login" className={`${classActive} ${style.button}`}>Войти</NavLink>
-        </>
+        </div>
     );
     let userInfo = (
         <>

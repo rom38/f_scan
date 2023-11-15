@@ -112,6 +112,7 @@
     text-decoration: none;
     background-color: #7CE3E1;
     border-radius: 5px;
+    margin: 5px;
 }
 
 .button:hover {
@@ -227,6 +228,11 @@
     opacity: 0.5;
 }
 
+.login_info {
+    display: flex;
+    align-items: center;
+}
+
 @keyframes spin {
     100% {
         transform: rotate(360deg);
@@ -251,7 +257,8 @@
     }
 
     .header_user,
-    .header_user_image {
+    .header_user_image,
+    .login_info {
         display: none;
     }
 }
