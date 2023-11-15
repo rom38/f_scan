@@ -10,7 +10,9 @@ import fakeImg from "../media/fake_img.png";
 const Document = ({ idDoc }) => {
     // let xmlImg = "";
     let xmlImg = fakeImg;
-    const regString = /<.*?>|;.*?;|&.*?t|s.*?;|\?.*?\d|\/.*?\s|(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)/g
+
+    const regString1 = /<\/sentence><sentence>/g
+    const regString2 = /<.*?>|;.*?;|&.*?t|s.*?;|\?.*?\d|\/.*?\s|(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2, 6})([/\w .-]*)/g
 
     const { data, error, isLoading, isSuccess, isError } = useGetDocumentsQuery({
         "ids": [idDoc]
@@ -55,7 +57,9 @@ const Document = ({ idDoc }) => {
             <img className={style.img} src={xmlImg} alt="" />
             <p className={style.content}>
                 {data.content.markup
-                    .replace(regString, "")
+                    .replace(regString1, "*br*")
+                    .replace(regString2, "")
+                    .replace(/\*br\*/g, "\r\n\r\n")
                 }
             </p>
             <div className={style.bottom}>

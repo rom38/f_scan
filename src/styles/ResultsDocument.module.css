@@ -82,6 +82,7 @@
     font-style: normal;
     line-height: normal;
     text-align: left;
+    white-space: pre-line;
 }
 
 .bottom {

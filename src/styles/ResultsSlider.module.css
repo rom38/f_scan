@@ -123,6 +123,7 @@
         flex-direction: row;
         height: auto;
         border-radius: 10px 10px 0px 0px;
+        justify-content: space-around;
     }
 
     .summary_slider {
