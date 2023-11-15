@@ -39,11 +39,6 @@ function App() {
                         </ProtectedRoute>
                     } />
 
-
-                    {/* <Route path="swagger" element={<SwaggerUIWidget />} /> */}
-                    {/* <Route path="list-dishes/:id" element={<CategoryDishes />} /> */}
-                    {/* <Route path="dish/:idDish" element={<Dish />} /> */}
-                    {/* <Route path="*" element={<NotFoundPage />} /> */}
                 </Route>
             </Routes>
         </>
